@@ -1,17 +1,27 @@
+import 'package:http/http.dart' as http;
+import '../models/User.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
-class UsersList {
-  List<DropdownMenuItem<String>> _dropDownItems = new List();
+class UserService {
+  static Future<List<DropdownMenuItem<User>>> getUsers() async {
+    var response = await http.Client()
+        .get("https://my.api.mockaroo.com/users?key=f4030c00");
+    var usersList = parseServices(response.body);
+    return getDropdownItems(usersList);
+  }
 
-  List<DropdownMenuItem<String>> getDropdownItems() {
-    _dropDownItems
-        .add(new DropdownMenuItem(value: 'mateus', child: new Text('Mateus')));
-    _dropDownItems.add(
-        new DropdownMenuItem(value: 'kennedy', child: new Text('Kennedy')));
-    _dropDownItems.add(
-        new DropdownMenuItem(value: 'marcelo', child: new Text('Marcelo')));
-    _dropDownItems.add(
-        new DropdownMenuItem(value: 'jonatan', child: new Text('Jonattan')));
-    return _dropDownItems;
+  static List<User> parseServices(String responseBody) {
+    return (json.decode(responseBody) as List)
+        .map((data) => new User.fromJson(data))
+        .toList();
+  }
+
+  static List<DropdownMenuItem<User>> getDropdownItems(List<User> users) {
+    return users
+        .map((user) =>
+            new DropdownMenuItem(value: user, child: Text('${user.name}')))
+        .toList();
   }
 }
