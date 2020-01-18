@@ -37,8 +37,11 @@ class Menu extends StatelessWidget {
                 ),
               ),
             ),
-            BaseListTile(Image.asset("images/c.png", width: 40, height: 40),
-                Icons.directions_run, "Jogar agora", () => {}),
+            BaseListTile(
+                Image.asset("images/c.png", width: 40, height: 40),
+                Icons.directions_run,
+                "Jogar agora",
+                () => Navigator.pushNamed(context, '/gamePage')),
             BaseListTile(
                 Image.asset("images/ranking.png", width: 40, height: 40),
                 Icons.poll,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './pages/Home/Home.dart';
-import './pages/Game.dart';
+import './pages/GamePage/Game.dart';
 
 void main() => runApp(MyApp());
 
