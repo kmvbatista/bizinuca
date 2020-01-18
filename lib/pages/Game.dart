@@ -2,6 +2,7 @@ import 'package:bizinuca/models/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../services/GetUsersList.dart';
+import '../components/Menu.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({Key key}) : super(key: key);
@@ -12,8 +13,9 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   List<DropdownMenuItem<User>> _usersToDropdown;
-  List<User> _usersToPlay;
+  List<User> _usersToPlay = new List<User>(4);
   bool isGameRunning = false;
+  final int playersQuantity = 4;
 
   @override
   void initState() {
@@ -53,40 +55,35 @@ class _GamePageState extends State<GamePage> {
   }
 
   User getUserRepeated() {
-    var users = new List<User>();
-    users.add(_user1);
-    users.add(_user2);
-    users.add(_user3);
-    users.add(_user4);
-    for (var i = 0; i < users.length - 1; i++) {
+    for (var i = 0; i < playersQuantity - 1; i++) {
       var isUserRepeated =
-          users.where((x) => x.name == users[i].name).length > 1;
-      if (isUserRepeated) return users[i];
+          _usersToPlay.where((x) => x.id == _usersToPlay[i].id).length > 1;
+      if (isUserRepeated) return _usersToPlay[i];
     }
     return null;
   }
 
-  void handleDropdown1(User selectedItem) {
+  void handleDropdown1(User selectedUser) {
     setState(() {
-      _user1 = selectedItem;
+      _usersToPlay[0] = selectedUser;
     });
   }
 
-  void handleDropdown2(User selectedItem) {
+  void handleDropdown2(User selectedUser) {
     setState(() {
-      _user2 = selectedItem;
+      _usersToPlay[1] = selectedUser;
     });
   }
 
-  void handleDropdown3(User selectedItem) {
+  void handleDropdown3(User selectedUser) {
     setState(() {
-      _user3 = selectedItem;
+      _usersToPlay[2] = selectedUser;
     });
   }
 
-  void handleDropdown4(User selectedItem) {
+  void handleDropdown4(User selectedUser) {
     setState(() {
-      _user4 = selectedItem;
+      _usersToPlay[3] = selectedUser;
     });
   }
 
@@ -95,7 +92,8 @@ class _GamePageState extends State<GamePage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: Text("${_user1.name} e ${_user2.name} venceram!"),
+            content: Text(
+                "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!"),
           );
         });
   }
@@ -105,7 +103,8 @@ class _GamePageState extends State<GamePage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: Text("${_user3.name} e ${_user4.name} venceram!"),
+            content: Text(
+                "${_usersToPlay[2].name} e ${_usersToPlay[3].name} venceram!"),
           );
         });
   }
@@ -140,166 +139,176 @@ class _GamePageState extends State<GamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: Menu(),
         body: Container(
-      decoration: BoxDecoration(color: Colors.green),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          ListTile(
-            leading: Image.asset('images/bolas.png'),
-            title: Text(
-              "Bizinuca Challenge",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
-            trailing: Icon(Icons.dehaze, color: Colors.black),
-          ),
-          Row(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            colors: <Color>[
+              Color(0xFF1B5E20),
+              Color(0xFF388E3C),
+              Color(0xFF66BB6A),
+            ],
+          )),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              isGameRunning
-                  ? Column(
-                      children: <Widget>[
-                        Container(
-                          child: Text('${_user1.name}, e ${_user2.name}'),
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: MaterialButton(
-                              splashColor: Colors.green,
-                              child: Text("Venceu",
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.white)),
-                              color: Colors.black,
-                              onPressed: () =>
-                                  showConfirmationDialog("leftPlayers"),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6)),
-                            ))
-                      ],
-                    )
-                  : Column(
-                      children: <Widget>[
-                        DropdownButton<User>(
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          value: _user1,
-                          items: _usersToDropdown,
-                          onChanged: handleDropdown1,
-                        ),
-                        DropdownButton<User>(
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          value: _user2,
-                          items: _dropDownItems,
-                          onChanged: handleDropdown2,
-                        ),
-                      ],
-                    ),
-              isGameRunning
-                  ? Column(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(bottom: 10),
-                          child: Text("Game is running...",
-                              style: TextStyle(
+              ListTile(
+                leading: Image.asset('images/pool.png'),
+                title: Text(
+                  "Bizinuca Challenge",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold),
+                ),
+                trailing: Icon(Icons.dehaze, color: Colors.black),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  isGameRunning
+                      ? Column(
+                          children: <Widget>[
+                            Container(
+                              child: Text(
+                                  '${_usersToPlay[0].name}, e ${_usersToPlay[1].name}'),
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(top: 20),
+                                child: MaterialButton(
+                                  splashColor: Colors.green,
+                                  child: Text("Venceu",
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.white)),
                                   color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold)),
+                                  onPressed: () =>
+                                      showConfirmationDialog("leftPlayers"),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6)),
+                                ))
+                          ],
+                        )
+                      : Column(
+                          children: <Widget>[
+                            DropdownButton<User>(
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              value: _usersToPlay[0],
+                              items: _usersToDropdown,
+                              onChanged: handleDropdown1,
+                            ),
+                            DropdownButton<User>(
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              value: _usersToPlay[1],
+                              items: _usersToDropdown,
+                              onChanged: handleDropdown2,
+                            ),
+                          ],
                         ),
-                        Container(
-                          height: 100,
-                          width: 100,
-                          child: Image(
-                            fit: BoxFit.contain,
-                            alignment: Alignment.center,
-                            color: Colors.black,
-                            image: AssetImage('images/tacos.png'),
-                          ),
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            child: MaterialButton(
-                              splashColor: Colors.green,
-                              child: Text("Cancelar",
+                  isGameRunning
+                      ? Column(
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.only(bottom: 10),
+                              child: Text("Game is running...",
                                   style: TextStyle(
-                                      fontSize: 15, color: Colors.white)),
-                              color: Colors.red,
-                              onPressed: () => setState(() {
-                                this.isGameRunning = false;
-                              }),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6)),
-                            ))
-                      ],
-                    )
-                  : Container(
-                      margin: EdgeInsets.only(top: 20),
-                      child: MaterialButton(
-                        splashColor: Colors.green,
-                        child: Text("Iniciar jogo",
-                            style:
-                                TextStyle(fontSize: 15, color: Colors.white)),
-                        color: Colors.black,
-                        onPressed: startGame,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6)),
-                      )),
-              isGameRunning
-                  ? Column(
-                      children: <Widget>[
-                        Container(
-                          child: Text('${_user3.name} e ${_user4.name}'),
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(top: 20),
-                            child: MaterialButton(
-                              splashColor: Colors.green,
-                              child: Text("Venceu",
-                                  style: TextStyle(
-                                      fontSize: 15, color: Colors.white)),
-                              color: Colors.black,
-                              onPressed: () =>
-                                  showConfirmationDialog('rightPlayers'),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6)),
-                            ))
-                      ],
-                    )
-                  : Column(
-                      children: <Widget>[
-                        DropdownButton(
-                          style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                            Container(
+                              height: 100,
+                              width: 100,
+                              child: Image(
+                                fit: BoxFit.contain,
+                                alignment: Alignment.center,
+                                color: Colors.black,
+                                image: AssetImage('images/tacos2.png'),
+                              ),
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(bottom: 10),
+                                child: MaterialButton(
+                                  splashColor: Colors.green,
+                                  child: Text("Cancelar",
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.white)),
+                                  color: Colors.red,
+                                  onPressed: () => setState(() {
+                                    this.isGameRunning = false;
+                                  }),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6)),
+                                ))
+                          ],
+                        )
+                      : Container(
+                          margin: EdgeInsets.only(top: 20),
+                          child: MaterialButton(
+                            splashColor: Colors.green,
+                            child: Text("Iniciar jogo",
+                                style: TextStyle(
+                                    fontSize: 15, color: Colors.white)),
                             color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          value: _user3,
-                          items: _dropDownItems,
-                          onChanged: handleDropdown3,
-                        ),
-                        DropdownButton(
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          value: _user4,
-                          items: _dropDownItems,
-                          onChanged: handleDropdown4,
-                        ),
-                      ],
-                    )
+                            onPressed: startGame,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6)),
+                          )),
+                  isGameRunning
+                      ? Column(
+                          children: <Widget>[
+                            Container(
+                              child: Text(
+                                  '${_usersToPlay[2].name} e ${_usersToPlay[3].name}'),
+                            ),
+                            Container(
+                                margin: EdgeInsets.only(top: 20),
+                                child: MaterialButton(
+                                  splashColor: Colors.green,
+                                  child: Text("Venceu",
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.white)),
+                                  color: Colors.black,
+                                  onPressed: () =>
+                                      showConfirmationDialog('rightPlayers'),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6)),
+                                ))
+                          ],
+                        )
+                      : Column(
+                          children: <Widget>[
+                            DropdownButton(
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              value: _usersToPlay[2],
+                              items: _usersToDropdown,
+                              onChanged: handleDropdown3,
+                            ),
+                            DropdownButton(
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              value: _usersToPlay[3],
+                              items: _usersToDropdown,
+                              onChanged: handleDropdown4,
+                            ),
+                          ],
+                        )
+                ],
+              ),
+              Row(),
             ],
           ),
-          Row(),
-        ],
-      ),
-    ));
+        ));
   }
 }

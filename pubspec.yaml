@@ -17,5 +17,20 @@ flutter:
   uses-material-design: true
   assets:
     - images/tacos.png
+    - images/tacos2.png
     - images/mesa.png
     - images/bolas.png
+    - images/billiard2.png
+    - images/billiards.png
+    - images/billiard3.png
+    - images/b.png
+    - images/c.png
+    - images/a.svg
+    - images/ranking.png
+    - images/logout.png
+    - images/logout2.png
+    - images/logout5.png
+    - images/billiardPerson.png
+    - images/snooker.png
+    - images/pool.png
+    
