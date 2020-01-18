@@ -1,8 +1,7 @@
-import 'package:bizinuca/pages/Main.dart';
 import 'package:flutter/material.dart';
 
 import './pages/Login.dart';
-import './pages/Main.dart';
+import './pages/Game.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Login(),
-        '/main': (context) => Main(),
+        '/gamePage': (context) => GamePage(),
       },
     );
   }

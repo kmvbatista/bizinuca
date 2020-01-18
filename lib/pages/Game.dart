@@ -3,19 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../services/GetUsersList.dart';
 
-class Main extends StatefulWidget {
-  const Main({Key key}) : super(key: key);
+class GamePage extends StatefulWidget {
+  const GamePage({Key key}) : super(key: key);
 
   @override
-  _MainState createState() => _MainState();
+  _GamePageState createState() => _GamePageState();
 }
 
-class _MainState extends State<Main> {
-  List<DropdownMenuItem<User>> _dropDownItems;
-  User _selectedItem1;
-  User _selectedItem2;
-  User _selectedItem3;
-  User _selectedItem4;
+class _GamePageState extends State<GamePage> {
+  List<DropdownMenuItem<User>> _usersToDropdown;
+  List<User> _usersToPlay;
   bool isGameRunning = false;
 
   @override
@@ -31,36 +28,65 @@ class _MainState extends State<Main> {
   void getUsers() {
     UserService.getUsers().then((res) {
       setState(() {
-        _dropDownItems = res;
-        _selectedItem1 = res[0].value;
-        _selectedItem2 = res[1].value;
-        _selectedItem3 = res[2].value;
-        _selectedItem4 = res[3].value;
+        for (var i = 0; i < 4; i++) {
+          _usersToPlay.add(_usersToDropdown[i].value);
+        }
       });
     });
   }
 
+  void startGame() {
+    var userRepeated = getUserRepeated();
+    if (userRepeated == null)
+      setState(() {
+        isGameRunning = true;
+      });
+    else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              content: Text("Não existem dois ${userRepeated.name}!"),
+            );
+          });
+    }
+  }
+
+  User getUserRepeated() {
+    var users = new List<User>();
+    users.add(_user1);
+    users.add(_user2);
+    users.add(_user3);
+    users.add(_user4);
+    for (var i = 0; i < users.length - 1; i++) {
+      var isUserRepeated =
+          users.where((x) => x.name == users[i].name).length > 1;
+      if (isUserRepeated) return users[i];
+    }
+    return null;
+  }
+
   void handleDropdown1(User selectedItem) {
     setState(() {
-      _selectedItem1 = selectedItem;
+      _user1 = selectedItem;
     });
   }
 
   void handleDropdown2(User selectedItem) {
     setState(() {
-      _selectedItem2 = selectedItem;
+      _user2 = selectedItem;
     });
   }
 
   void handleDropdown3(User selectedItem) {
     setState(() {
-      _selectedItem3 = selectedItem;
+      _user3 = selectedItem;
     });
   }
 
   void handleDropdown4(User selectedItem) {
     setState(() {
-      _selectedItem4 = selectedItem;
+      _user4 = selectedItem;
     });
   }
 
@@ -69,8 +95,7 @@ class _MainState extends State<Main> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: Text(
-                "${_selectedItem1.name} e ${_selectedItem2.name} venceram!"),
+            content: Text("${_user1.name} e ${_user2.name} venceram!"),
           );
         });
   }
@@ -80,8 +105,7 @@ class _MainState extends State<Main> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: Text(
-                "${_selectedItem3.name} e ${_selectedItem4.name} venceram!"),
+            content: Text("${_user3.name} e ${_user4.name} venceram!"),
           );
         });
   }
@@ -140,8 +164,7 @@ class _MainState extends State<Main> {
                   ? Column(
                       children: <Widget>[
                         Container(
-                          child: Text(
-                              '${_selectedItem1.name}, e ${_selectedItem2.name}'),
+                          child: Text('${_user1.name}, e ${_user2.name}'),
                         ),
                         Container(
                             margin: EdgeInsets.only(top: 20),
@@ -165,8 +188,8 @@ class _MainState extends State<Main> {
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
-                          value: _selectedItem1,
-                          items: _dropDownItems,
+                          value: _user1,
+                          items: _usersToDropdown,
                           onChanged: handleDropdown1,
                         ),
                         DropdownButton<User>(
@@ -174,7 +197,7 @@ class _MainState extends State<Main> {
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
-                          value: _selectedItem2,
+                          value: _user2,
                           items: _dropDownItems,
                           onChanged: handleDropdown2,
                         ),
@@ -225,9 +248,7 @@ class _MainState extends State<Main> {
                             style:
                                 TextStyle(fontSize: 15, color: Colors.white)),
                         color: Colors.black,
-                        onPressed: () {
-                          setState(() => isGameRunning = true);
-                        },
+                        onPressed: startGame,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6)),
                       )),
@@ -235,8 +256,7 @@ class _MainState extends State<Main> {
                   ? Column(
                       children: <Widget>[
                         Container(
-                          child: Text(
-                              '${_selectedItem3.name} e ${_selectedItem4.name}'),
+                          child: Text('${_user3.name} e ${_user4.name}'),
                         ),
                         Container(
                             margin: EdgeInsets.only(top: 20),
@@ -260,7 +280,7 @@ class _MainState extends State<Main> {
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
-                          value: _selectedItem3,
+                          value: _user3,
                           items: _dropDownItems,
                           onChanged: handleDropdown3,
                         ),
@@ -269,7 +289,7 @@ class _MainState extends State<Main> {
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
-                          value: _selectedItem4,
+                          value: _user4,
                           items: _dropDownItems,
                           onChanged: handleDropdown4,
                         ),

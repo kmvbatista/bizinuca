@@ -13,7 +13,7 @@ class Login extends StatelessWidget {
       ),
       body: Center(
           child: GradientButton(
-              "Fazer Login", () => Navigator.pushNamed(context, '/main'))),
+              "Fazer Login", () => Navigator.pushNamed(context, '/gamePage'))),
     );
   }
 }
