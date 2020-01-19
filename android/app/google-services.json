@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "620998236382",
+    "firebase_url": "https://bizinuca.firebaseio.com",
+    "project_id": "bizinuca",
+    "storage_bucket": "bizinuca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620998236382:android:254461c4de35648ce1ca4f",
+        "android_client_info": {
+          "package_name": "com.example.bizinuca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620998236382-u41ht2sg4id4f4vp2frlrh2of5ppsa0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpyoagY6cdAXswy-1RbV7JKrw_BsECJFc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620998236382-u41ht2sg4id4f4vp2frlrh2of5ppsa0k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

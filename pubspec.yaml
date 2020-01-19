@@ -9,6 +9,7 @@ dependencies:
   fluttie: ^0.5.0
   flutter_spinkit: "^4.1.1"
   http: ^0.12.0+2
+  firebase_auth: ^0.15.3
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
@@ -23,6 +24,7 @@ flutter:
     - images/mesa.png
     - images/bolas.png
     - images/billiard2.png
+    - images/billiard.png
     - images/billiards.png
     - images/billiard3.png
     - images/b.png

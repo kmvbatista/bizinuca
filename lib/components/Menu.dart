@@ -13,13 +13,14 @@ class Menu extends StatelessWidget {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                colors: <Color>[
-                  Color(0xFF1B5E20),
-                  Color(0xFF388E3C),
-                  Color(0xFF66BB6A),
-                ],
-              )),
+                gradient: LinearGradient(
+                  colors: <Color>[
+                    Color(0xFF66BB6A),
+                    Color(0xFF388E3C),
+                    Color(0xFF1B5E20),
+                  ],
+                ),
+              ),
               child: Container(
                 child: Column(
                   children: <Widget>[
@@ -30,7 +31,7 @@ class Menu extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 10.0),
-                      child: Text("Bem vindo, Bizinuqueiro!",
+                      child: Text("Para onde, Bizinuqueiro?",
                           style: TextStyle(color: Colors.white)),
                     )
                   ],
