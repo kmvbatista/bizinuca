@@ -1,12 +1,12 @@
+import 'package:bizinuca/pages/Home.dart';
 import 'package:flutter/material.dart';
 
-import './pages/Home/Home.dart';
+import './pages/Statistics/Statistics.dart';
 import './pages/GamePage/Game.dart';
-import './pages/ranking.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(Bizinuca());
 
-class MyApp extends StatelessWidget {
+class Bizinuca extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => Home(),
         '/gamePage': (context) => GamePage(),
-        '/ranking': (context) => Ranking()
+        '/statistics': (context) => Statistics()
       },
     );
   }

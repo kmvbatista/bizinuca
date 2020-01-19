@@ -46,7 +46,7 @@ class Menu extends StatelessWidget {
                 Image.asset("images/ranking.png", width: 40, height: 40),
                 Icons.poll,
                 "Ranking",
-                () => Navigator.pushNamed(context, '/ranking')),
+                () => Navigator.pushNamed(context, '/statistics')),
             BaseListTile(
                 Image.asset("images/logout5.png", width: 40, height: 40),
                 Icons.subdirectory_arrow_left,

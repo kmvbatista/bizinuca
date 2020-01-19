@@ -2,8 +2,6 @@ import 'package:http/http.dart' as http;
 import '../models/User.dart';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 class UserService {
   static Future<List<User>> getUsers() async {
     var response = await http.Client()
