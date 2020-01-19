@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
+class SignUp extends StatefulWidget {
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +21,13 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 128,
               width: 128,
-              child: Image.asset("images/tacos2.png"),
+              child: Image.asset("images/billiard3.png"),
             ),
             SizedBox(
               height: 10,
             ),
             Text(
-              "Bem vindo ao Bizinuca!",
+              "Cadastre-se!",
               style: TextStyle(
                   color: Colors.green,
                   fontStyle: FontStyle.italic,
@@ -38,10 +38,25 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 10,
             ),
-            TextFormField(
+            TextField(
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
-                labelText: "Usuário",
+                labelText: "Nome de usuário (é único)",
+                labelStyle: TextStyle(
+                    color: Colors.black38,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20),
+              ),
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: "Senha",
                 labelStyle: TextStyle(
                     color: Colors.black38,
                     fontWeight: FontWeight.w400,
@@ -54,13 +69,13 @@ class _LoginState extends State<Login> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 5,
             ),
             TextField(
               keyboardType: TextInputType.text,
               obscureText: true,
               decoration: InputDecoration(
-                labelText: "Senha",
+                labelText: "Confirmar Senha",
                 labelStyle: TextStyle(
                     color: Colors.black38,
                     fontWeight: FontWeight.w400,
@@ -86,30 +101,16 @@ class _LoginState extends State<Login> {
               child: SizedBox.expand(
                 child: FlatButton(
                   child: Text(
-                    "Fazer Login",
+                    "Cadastrar-se",
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
-                  onPressed: () => Navigator.pushNamed(context, '/statistics'),
+                  onPressed: () => Navigator.pushNamed(context, '/login'),
                 ),
               ),
             ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              height: 40,
-              child: FlatButton(
-                child: Text(
-                  "Cadastre-se",
-                  textAlign: TextAlign.center,
-                ),
-                textColor: Colors.green,
-                onPressed: () => Navigator.pushNamed(context, '/signup'),
-              ),
-            )
           ],
         ),
       ),

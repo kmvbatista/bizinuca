@@ -187,7 +187,7 @@ class _GamePageState extends State<GamePage> {
                         ),
                         onPressed: () => _scaffoldKey.currentState.openDrawer(),
                       ),
-                      trailing: Image.asset('images/pool.png'),
+                      trailing: Image.asset('images/billiards.png'),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -197,13 +197,17 @@ class _GamePageState extends State<GamePage> {
                                 children: <Widget>[
                                   Container(
                                     child: Text(
-                                        '${_usersToPlay[0].name}, e ${_usersToPlay[1].name}'),
+                                      '${_usersToPlay[0].name} e ${_usersToPlay[1].name}',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                   Container(
                                       margin: EdgeInsets.only(top: 20),
                                       child: MaterialButton(
                                         splashColor: Colors.green,
-                                        child: Text("Venceu",
+                                        child: Text("Selecionar Vencedor",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 color: Colors.white)),
@@ -243,7 +247,7 @@ class _GamePageState extends State<GamePage> {
                                 children: <Widget>[
                                   Container(
                                     margin: EdgeInsets.only(bottom: 10),
-                                    child: Text("Game is running...",
+                                    child: Text("Jogo rolando...",
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 15,
@@ -294,13 +298,17 @@ class _GamePageState extends State<GamePage> {
                                 children: <Widget>[
                                   Container(
                                     child: Text(
-                                        '${_usersToPlay[2].name} e ${_usersToPlay[3].name}'),
+                                      '${_usersToPlay[2].name} e ${_usersToPlay[3].name}',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                   Container(
                                       margin: EdgeInsets.only(top: 20),
                                       child: MaterialButton(
                                         splashColor: Colors.green,
-                                        child: Text("Venceu",
+                                        child: Text("Selecionar Vencedor",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 color: Colors.white)),

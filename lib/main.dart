@@ -1,5 +1,6 @@
 import 'package:bizinuca/pages/Home.dart';
 import 'package:bizinuca/pages/Login.dart';
+import 'package:bizinuca/pages/Signup.dart';
 import 'package:flutter/material.dart';
 
 import './pages/Statistics/Statistics.dart';
@@ -20,7 +21,8 @@ class Bizinuca extends StatelessWidget {
       initialRoute: '/Login',
       routes: {
         '/': (context) => Home(),
-        '/Login': (context) => Login(),
+        '/login': (context) => Login(),
+        '/signup': (context) => SignUp(),
         '/gamePage': (context) => GamePage(),
         '/statistics': (context) => Statistics()
       },
