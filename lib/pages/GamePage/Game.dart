@@ -30,15 +30,22 @@ class _GamePageState extends State<GamePage> {
   }
 
   void getUsers() {
-    UserService.getUsers().then((usersToDropdown) {
+    UserService.getUsers().then((users) {
       _usersToPlay = new List<User>();
       setState(() {
         for (var i = 0; i < playersQuantity; i++) {
-          _usersToPlay.add(usersToDropdown[i].value);
+          _usersToPlay.add(users[i]);
         }
-        _usersToDropdown = usersToDropdown;
+        _usersToDropdown = getDropdownUsers(users);
       });
     });
+  }
+
+  List<DropdownMenuItem<User>> getDropdownUsers(List<User> users) {
+    return users
+        .map((user) =>
+            new DropdownMenuItem(value: user, child: Text('${user.name}')))
+        .toList();
   }
 
   void startGame() {
@@ -147,7 +154,7 @@ class _GamePageState extends State<GamePage> {
         backgroundColor: Colors.green,
         drawer: Menu(),
         body: _usersToPlay == null
-            ? SpinKitRotatingCircle(
+            ? SpinKitCircle(
                 color: Colors.white,
                 size: 50.0,
               )
