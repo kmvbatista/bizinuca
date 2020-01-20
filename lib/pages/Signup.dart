@@ -1,3 +1,4 @@
+import 'package:bizinuca/services/authentication_service.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -6,6 +7,17 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
+  handleSignUp() async {
+    var result = await AuthenticationService.signUpWithEmail(
+        email: emailController.text, password: passwordController.text);
+    if (result) {
+      Navigator.popAndPushNamed(context, '/login');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,9 +51,10 @@ class _SignUpState extends State<SignUp> {
               height: 10,
             ),
             TextField(
-              keyboardType: TextInputType.text,
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                labelText: "Nome de usuário (é único)",
+                labelText: "Email",
                 labelStyle: TextStyle(
                     color: Colors.black38,
                     fontWeight: FontWeight.w400,
@@ -53,6 +66,7 @@ class _SignUpState extends State<SignUp> {
               height: 20,
             ),
             TextFormField(
+              controller: passwordController,
               keyboardType: TextInputType.text,
               obscureText: true,
               decoration: InputDecoration(
@@ -107,7 +121,7 @@ class _SignUpState extends State<SignUp> {
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
-                  onPressed: () => Navigator.pushNamed(context, '/login'),
+                  onPressed: handleSignUp,
                 ),
               ),
             ),

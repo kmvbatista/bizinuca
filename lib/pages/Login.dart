@@ -39,9 +39,9 @@ class _LoginState extends State<Login> {
               height: 10,
             ),
             TextFormField(
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                labelText: "Usuário",
+                labelText: "Email",
                 labelStyle: TextStyle(
                     color: Colors.black38,
                     fontWeight: FontWeight.w400,

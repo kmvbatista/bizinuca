@@ -52,7 +52,7 @@ class Menu extends StatelessWidget {
                 Image.asset("images/logout5.png", width: 40, height: 40),
                 Icons.subdirectory_arrow_left,
                 "Logout",
-                () => {}),
+                () => Navigator.pushNamed(context, '/signup')),
           ],
         ),
       ),

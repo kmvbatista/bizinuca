@@ -1,7 +1,7 @@
 import 'package:bizinuca/models/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../services/GetUsersList.dart';
+import '../../services/UserService.dart';
 import '../../components/Menu.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 

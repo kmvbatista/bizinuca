@@ -1,7 +1,7 @@
 class User {
   String name;
   int points;
-  int id;
+  String id;
 
   User({this.name, this.points, this.id});
 

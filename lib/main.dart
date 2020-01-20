@@ -18,7 +18,7 @@ class Bizinuca extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      initialRoute: '/Login',
+      initialRoute: '/login',
       routes: {
         '/': (context) => Home(),
         '/login': (context) => Login(),
