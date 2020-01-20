@@ -105,27 +105,9 @@ class _GamePageState extends State<GamePage> {
     }
   }
 
-  void handleDropdown1(User selectedUser) {
+  void handleUserDropdown(User selectedUser, {@required int userIndex}) {
     setState(() {
-      _usersToPlay[0] = selectedUser;
-    });
-  }
-
-  void handleDropdown2(User selectedUser) {
-    setState(() {
-      _usersToPlay[1] = selectedUser;
-    });
-  }
-
-  void handleDropdown3(User selectedUser) {
-    setState(() {
-      _usersToPlay[2] = selectedUser;
-    });
-  }
-
-  void handleDropdown4(User selectedUser) {
-    setState(() {
-      _usersToPlay[3] = selectedUser;
+      _usersToPlay[userIndex] = selectedUser;
     });
   }
 
@@ -192,10 +174,16 @@ class _GamePageState extends State<GamePage> {
                               )
                             : Column(
                                 children: <Widget>[
-                                  UsersDropDown(_usersToPlay[0],
-                                      _usersToDropdown, handleDropdown1),
-                                  UsersDropDown(_usersToPlay[1],
-                                      _usersToDropdown, handleDropdown2),
+                                  UsersDropDown(
+                                      _usersToPlay[0],
+                                      _usersToDropdown,
+                                      (User user) => handleUserDropdown(user,
+                                          userIndex: 0)),
+                                  UsersDropDown(
+                                      _usersToPlay[1],
+                                      _usersToDropdown,
+                                      (User user) => handleUserDropdown(user,
+                                          userIndex: 1)),
                                 ],
                               ),
                         isGameRunning
@@ -252,10 +240,16 @@ class _GamePageState extends State<GamePage> {
                               )
                             : Column(
                                 children: <Widget>[
-                                  UsersDropDown(_usersToPlay[2],
-                                      _usersToDropdown, handleDropdown2),
-                                  UsersDropDown(_usersToPlay[3],
-                                      _usersToDropdown, handleDropdown3),
+                                  UsersDropDown(
+                                      _usersToPlay[2],
+                                      _usersToDropdown,
+                                      (User user) => handleUserDropdown(user,
+                                          userIndex: 2)),
+                                  UsersDropDown(
+                                      _usersToPlay[3],
+                                      _usersToDropdown,
+                                      (User user) => handleUserDropdown(user,
+                                          userIndex: 3)),
                                 ],
                               )
                       ],

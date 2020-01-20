@@ -24,6 +24,7 @@ class _StatisticsState extends State<Statistics>
   void initState() {
     _tabController = new TabController(vsync: this, initialIndex: 0, length: 3);
     getUsers();
+    getUserMatches();
     super.initState();
   }
 
@@ -32,6 +33,12 @@ class _StatisticsState extends State<Statistics>
       setState(() {
         _usersList = users;
       });
+    });
+  }
+
+  getUserMatches() async {
+    UserRepository.getUsersMatches().then((users) {
+      print(users);
     });
   }
 
