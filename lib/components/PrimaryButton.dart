@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class DefaultButton extends StatelessWidget {
+class PrimaryButton extends StatelessWidget {
   final Function onPress;
   final String buttonText;
   final Color buttonColor;
 
-  DefaultButton(this.buttonText, this.onPress, this.buttonColor);
+  PrimaryButton(this.buttonText, this.onPress, this.buttonColor);
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -6,6 +6,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  back_button_interceptor: ^4.2.3
   cloud_firestore: 0.13.0+1
   fluttie: ^0.5.0
   flutter_spinkit: "^4.1.1"

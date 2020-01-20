@@ -1,7 +1,7 @@
 import 'package:bizinuca/components/Menu.dart';
 import 'package:bizinuca/models/User.dart';
 import 'package:bizinuca/pages/Gamehistory.dart';
-import 'package:bizinuca/pages/graphs.dart';
+import 'package:bizinuca/pages/Statistics/Graphs.dart';
 import 'package:bizinuca/Repositories/UserRepository.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';

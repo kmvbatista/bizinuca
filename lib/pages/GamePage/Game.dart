@@ -1,4 +1,4 @@
-import 'package:bizinuca/components/DefaultButton.dart';
+import 'package:bizinuca/components/PrimaryButton.dart';
 import 'package:bizinuca/models/User.dart';
 import 'package:bizinuca/pages/GamePage/CustomWidgets/PrimaryText.dart';
 import 'package:bizinuca/services/DialogService.dart';
@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import '../../Repositories/UserRepository.dart';
 import '../../components/Menu.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 import 'CustomWidgets/UsersDropdown.dart';
 import 'GameLogic.dart';
@@ -29,10 +30,18 @@ class _GamePageState extends State<GamePage> {
   void initState() {
     getUsers();
     super.initState();
+    BackButtonInterceptor.add(myInterceptor);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+    return false;
   }
 
   void getUsers() {
@@ -170,7 +179,7 @@ class _GamePageState extends State<GamePage> {
                                 children: <Widget>[
                                   PrimaryText(
                                       '${_usersToPlay[0].name} e ${_usersToPlay[1].name}'),
-                                  DefaultButton(
+                                  PrimaryButton(
                                       'Selecionar Vencedor',
                                       () =>
                                           DialogService.showConfirmationDialog(
@@ -212,7 +221,7 @@ class _GamePageState extends State<GamePage> {
                                       image: AssetImage('images/tacos.png'),
                                     ),
                                   ),
-                                  DefaultButton(
+                                  PrimaryButton(
                                       "Cancelar",
                                       () => setState(() {
                                             this.isGameRunning = false;
@@ -220,7 +229,7 @@ class _GamePageState extends State<GamePage> {
                                       Colors.red)
                                 ],
                               )
-                            : DefaultButton(
+                            : PrimaryButton(
                                 'Iniciar Jogo',
                                 startGame,
                                 Colors.black,
@@ -230,7 +239,7 @@ class _GamePageState extends State<GamePage> {
                                 children: <Widget>[
                                   PrimaryText(
                                       '${_usersToPlay[2].name} e ${_usersToPlay[3].name}'),
-                                  DefaultButton(
+                                  PrimaryButton(
                                     'Selecionar Vencedor',
                                     () => DialogService.showConfirmationDialog(
                                         context, () {
