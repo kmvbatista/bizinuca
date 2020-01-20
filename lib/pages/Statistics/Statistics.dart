@@ -2,11 +2,11 @@ import 'package:bizinuca/components/Menu.dart';
 import 'package:bizinuca/models/User.dart';
 import 'package:bizinuca/pages/Gamehistory.dart';
 import 'package:bizinuca/pages/graphs.dart';
-import 'package:bizinuca/services/UserService.dart';
+import 'package:bizinuca/Repositories/UserRepository.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
-import './customWidgets/Ranking.dart';
+import './CustomWidgets/Ranking.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({Key key}) : super(key: key);
@@ -28,7 +28,7 @@ class _StatisticsState extends State<Statistics>
   }
 
   getUsers() async {
-    UserService.getUsers().then((users) {
+    UserRepository.getUsers().then((users) {
       setState(() {
         _usersList = users;
       });

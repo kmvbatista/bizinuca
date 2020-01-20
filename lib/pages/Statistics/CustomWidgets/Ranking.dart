@@ -1,5 +1,5 @@
 import 'package:bizinuca/models/User.dart';
-import 'package:bizinuca/services/UserService.dart';
+import 'package:bizinuca/Repositories/UserRepository.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +21,7 @@ class _RankingState extends State<Ranking> {
   }
 
   getUsers() async {
-    UserService.getUsers().then((users) {
+    UserRepository.getUsers().then((users) {
       setState(() {
         _usersList = users;
       });

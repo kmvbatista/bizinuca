@@ -1,9 +1,11 @@
 import 'package:bizinuca/models/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../services/UserService.dart';
+import '../../Repositories/UserRepository.dart';
 import '../../components/Menu.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import 'CustomWidgets/UsersDropdown.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({Key key}) : super(key: key);
@@ -30,7 +32,7 @@ class _GamePageState extends State<GamePage> {
   }
 
   void getUsers() {
-    UserService.getUsers().then((users) {
+    UserRepository.getUsers().then((users) {
       _usersToPlay = new List<User>();
       setState(() {
         for (var i = 0; i < playersQuantity; i++) {
@@ -74,11 +76,7 @@ class _GamePageState extends State<GamePage> {
     return null;
   }
 
-  void handleDropdown1(User selectedUser) {
-    setState(() {
-      _usersToPlay[0] = selectedUser;
-    });
-  }
+  void handleDropdown1(User selectedUser) {}
 
   void handleDropdown2(User selectedUser) {
     setState(() {
@@ -222,24 +220,10 @@ class _GamePageState extends State<GamePage> {
                               )
                             : Column(
                                 children: <Widget>[
-                                  DropdownButton<User>(
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    value: _usersToPlay[0],
-                                    items: _usersToDropdown,
-                                    onChanged: handleDropdown1,
-                                  ),
-                                  DropdownButton<User>(
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    value: _usersToPlay[1],
-                                    items: _usersToDropdown,
-                                    onChanged: handleDropdown2,
-                                  ),
+                                  UsersDropDown(_usersToPlay[0],
+                                      _usersToDropdown, handleDropdown1),
+                                  UsersDropDown(_usersToPlay[1],
+                                      _usersToDropdown, handleDropdown2),
                                 ],
                               ),
                         isGameRunning
@@ -323,24 +307,10 @@ class _GamePageState extends State<GamePage> {
                               )
                             : Column(
                                 children: <Widget>[
-                                  DropdownButton(
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    value: _usersToPlay[2],
-                                    items: _usersToDropdown,
-                                    onChanged: handleDropdown3,
-                                  ),
-                                  DropdownButton(
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    value: _usersToPlay[3],
-                                    items: _usersToDropdown,
-                                    onChanged: handleDropdown4,
-                                  ),
+                                  UsersDropDown(_usersToPlay[2],
+                                      _usersToDropdown, handleDropdown2),
+                                  UsersDropDown(_usersToPlay[3],
+                                      _usersToDropdown, handleDropdown3),
                                 ],
                               )
                       ],

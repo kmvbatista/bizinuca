@@ -1,7 +1,7 @@
 import '../models/User.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserService {
+class UserRepository {
   static Future getUsers() async {
     var response = await Firestore.instance
         .collection('users')
