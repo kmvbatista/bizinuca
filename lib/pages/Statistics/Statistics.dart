@@ -1,12 +1,13 @@
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter/material.dart';
+
+import 'package:bizinuca/Repositories/StatisticsRepository.dart';
 import 'package:bizinuca/components/Menu.dart';
 import 'package:bizinuca/models/Game.dart';
 import 'package:bizinuca/models/User.dart';
 import 'package:bizinuca/pages/Gamehistory.dart';
 import 'package:bizinuca/pages/Statistics/Graphs.dart';
 import 'package:bizinuca/Repositories/UserRepository.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter/material.dart';
-
 import './CustomWidgets/Ranking.dart';
 
 class Statistics extends StatefulWidget {
@@ -39,7 +40,7 @@ class _StatisticsState extends State<Statistics>
   }
 
   getUserGames() async {
-    UserRepository.getUserGames().then((games) {
+    StatisticsRepository.getUserGames().then((games) {
       setState(() {
         _userGames = games;
       });

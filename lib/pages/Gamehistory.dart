@@ -48,10 +48,8 @@ class _GameHistoryState extends State<GameHistory> {
             )
           : SingleChildScrollView(
               child: DataTable(
-                sortColumnIndex: 1,
-                sortAscending: true,
                 columns: [
-                  DataColumn(label: Text("Data"), numeric: false),
+                  DataColumn(label: Text("Data")),
                   DataColumn(
                     label: Text("Jogadores"),
                     numeric: false,

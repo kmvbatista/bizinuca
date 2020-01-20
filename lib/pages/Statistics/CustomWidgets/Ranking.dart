@@ -1,5 +1,6 @@
 import 'package:bizinuca/models/User.dart';
 import 'package:bizinuca/Repositories/UserRepository.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
@@ -29,14 +30,28 @@ class _RankingState extends State<Ranking> {
     });
   }
 
+  getUserTextStyle(String username) {
+    return username == 'jose'
+        ? TextStyle(
+            color: Colors.green,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold)
+        : null;
+  }
+
   getDataRows() {
+    TextStyle textStyle;
     setState(() {
-      _dataRows = _usersList
-          .map((user) => DataRow(cells: [
-                DataCell(Text(user.name)),
-                DataCell(Text(user.points.toString()))
-              ]))
-          .toList();
+      _dataRows = _usersList.map((user) {
+        textStyle = getUserTextStyle(user.name);
+        return DataRow(cells: [
+          DataCell(Text(user.name, style: textStyle)),
+          DataCell(Text(
+            user.points.toString(),
+            style: textStyle,
+          ))
+        ]);
+      }).toList();
     });
   }
 
@@ -50,8 +65,6 @@ class _RankingState extends State<Ranking> {
             )
           : SingleChildScrollView(
               child: DataTable(
-                sortColumnIndex: 1,
-                sortAscending: true,
                 columns: [
                   DataColumn(label: Text("Jogador"), numeric: false),
                   DataColumn(

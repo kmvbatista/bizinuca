@@ -30,18 +30,6 @@ class _GamePageState extends State<GamePage> {
   void initState() {
     getUsers();
     super.initState();
-    BackButtonInterceptor.add(myInterceptor);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-    ]);
-  }
-
-  bool myInterceptor(bool stopDefaultButtonEvent) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
-    return false;
   }
 
   void getUsers() {
