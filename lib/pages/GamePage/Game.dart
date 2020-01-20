@@ -76,13 +76,7 @@ class _GamePageState extends State<GamePage> {
   }
 
   void announceVictory(String textDialog) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Text(textDialog),
-          );
-        });
+    DialogService.showAlertDialog(context, textDialog);
   }
 
   //TODO : DISPLAY LOADER WHILE UPDATING
@@ -97,7 +91,7 @@ class _GamePageState extends State<GamePage> {
       GameLogic.recalculateUserPoints(_usersToPlay, WinnerSide.LeftSide)
           .then((res) {
         announceVictory(
-            "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
+            "${_usersToPlay[2].name} e ${_usersToPlay[3].name} venceram!");
       });
     }
   }
@@ -180,10 +174,10 @@ class _GamePageState extends State<GamePage> {
                                       'Selecionar Vencedor',
                                       () =>
                                           DialogService.showConfirmationDialog(
-                                              context,
-                                              () => handleVictory(
-                                                  WinnerSide.LeftSide),
-                                              "Confirmar Vencedor?"),
+                                              context, () {
+                                            Navigator.of(context).pop();
+                                            handleVictory(WinnerSide.LeftSide);
+                                          }, "Confirmar Vencedor?"),
                                       Colors.black),
                                 ],
                               )
@@ -239,10 +233,10 @@ class _GamePageState extends State<GamePage> {
                                   DefaultButton(
                                     'Selecionar Vencedor',
                                     () => DialogService.showConfirmationDialog(
-                                        context,
-                                        () =>
-                                            handleVictory(WinnerSide.RightSide),
-                                        "Confirmar Vencedor?"),
+                                        context, () {
+                                      Navigator.of(context).pop();
+                                      handleVictory(WinnerSide.RightSide);
+                                    }, "Confirmar Vencedor?"),
                                     Colors.black,
                                   ),
                                 ],
