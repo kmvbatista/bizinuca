@@ -18,4 +18,20 @@ class DialogService {
           );
         });
   }
+
+  static showAlertDialog(BuildContext context, String text) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Text(text),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Ok"),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            ],
+          );
+        });
+  }
 }

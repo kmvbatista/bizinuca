@@ -60,13 +60,8 @@ class _GamePageState extends State<GamePage> {
         isGameRunning = true;
       });
     else {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: Text("Não existem dois ${userRepeated.name}!"),
-            );
-          });
+      DialogService.showAlertDialog(
+          context, "Não existem dois ${userRepeated.name}!");
     }
   }
 
@@ -77,6 +72,26 @@ class _GamePageState extends State<GamePage> {
       if (isUserRepeated) return _usersToPlay[i];
     }
     return null;
+  }
+
+  void announceVictory(String textDialog) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Text(textDialog),
+          );
+        });
+  }
+
+  void handleVictory(String players) {
+    Navigator.of(context).pop();
+    if (players == "leftPlayers")
+      announceVictory(
+          "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
+    else
+      announceVictory(
+          "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
   }
 
   void handleDropdown1(User selectedUser) {
@@ -101,26 +116,6 @@ class _GamePageState extends State<GamePage> {
     setState(() {
       _usersToPlay[3] = selectedUser;
     });
-  }
-
-  void announceVictory(String textDialog) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Text(textDialog),
-          );
-        });
-  }
-
-  void handleVictory(String players) {
-    Navigator.of(context).pop();
-    if (players == "leftPlayers")
-      announceVictory(
-          "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
-    else
-      announceVictory(
-          "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
   }
 
   @override
