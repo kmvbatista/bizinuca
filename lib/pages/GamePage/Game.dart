@@ -1,3 +1,4 @@
+import 'package:bizinuca/components/BlackButton.dart';
 import 'package:bizinuca/models/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -201,21 +202,10 @@ class _GamePageState extends State<GamePage> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  Container(
-                                      margin: EdgeInsets.only(top: 20),
-                                      child: MaterialButton(
-                                        splashColor: Colors.green,
-                                        child: Text("Selecionar Vencedor",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.white)),
-                                        color: Colors.black,
-                                        onPressed: () => showConfirmationDialog(
-                                            "leftPlayers"),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6)),
-                                      ))
+                                  BlackButton(
+                                    'Selecionar Vencedor',
+                                    () => showConfirmationDialog('leftPlayers'),
+                                  ),
                                 ],
                               )
                             : Column(
@@ -288,21 +278,11 @@ class _GamePageState extends State<GamePage> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  Container(
-                                      margin: EdgeInsets.only(top: 20),
-                                      child: MaterialButton(
-                                        splashColor: Colors.green,
-                                        child: Text("Selecionar Vencedor",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.white)),
-                                        color: Colors.black,
-                                        onPressed: () => showConfirmationDialog(
-                                            'rightPlayers'),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6)),
-                                      ))
+                                  BlackButton(
+                                    'Selecionar Vencedor',
+                                    () =>
+                                        showConfirmationDialog('rightPlayers'),
+                                  ),
                                 ],
                               )
                             : Column(
