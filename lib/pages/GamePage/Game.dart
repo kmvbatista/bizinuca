@@ -1,5 +1,7 @@
-import 'package:bizinuca/components/BlackButton.dart';
+import 'package:bizinuca/components/DefaultButton.dart';
 import 'package:bizinuca/models/User.dart';
+import 'package:bizinuca/pages/GamePage/CustomWidgets/PrimaryText.dart';
+import 'package:bizinuca/services/DialogService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../Repositories/UserRepository.dart';
@@ -77,7 +79,11 @@ class _GamePageState extends State<GamePage> {
     return null;
   }
 
-  void handleDropdown1(User selectedUser) {}
+  void handleDropdown1(User selectedUser) {
+    setState(() {
+      _usersToPlay[0] = selectedUser;
+    });
+  }
 
   void handleDropdown2(User selectedUser) {
     setState(() {
@@ -97,24 +103,12 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
-  void onLeftPlayersVictory() {
+  void announceVictory(String textDialog) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: Text(
-                "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!"),
-          );
-        });
-  }
-
-  void onRightPlayersVictory() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: Text(
-                "${_usersToPlay[2].name} e ${_usersToPlay[3].name} venceram!"),
+            content: Text(textDialog),
           );
         });
   }
@@ -122,28 +116,11 @@ class _GamePageState extends State<GamePage> {
   void handleVictory(String players) {
     Navigator.of(context).pop();
     if (players == "leftPlayers")
-      onLeftPlayersVictory();
+      announceVictory(
+          "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
     else
-      onRightPlayersVictory();
-  }
-
-  void showConfirmationDialog(String winnerPlayers) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Tens certeza?"),
-            actions: <Widget>[
-              FlatButton(
-                child: Text("Não"),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-              FlatButton(
-                  child: Text("Sim"),
-                  onPressed: () => handleVictory(winnerPlayers)),
-            ],
-          );
-        });
+      announceVictory(
+          "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
   }
 
   @override
@@ -194,18 +171,17 @@ class _GamePageState extends State<GamePage> {
                         isGameRunning
                             ? Column(
                                 children: <Widget>[
-                                  Container(
-                                    child: Text(
-                                      '${_usersToPlay[0].name} e ${_usersToPlay[1].name}',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  BlackButton(
-                                    'Selecionar Vencedor',
-                                    () => showConfirmationDialog('leftPlayers'),
-                                  ),
+                                  PrimaryText(
+                                      '${_usersToPlay[0].name} e ${_usersToPlay[1].name}'),
+                                  DefaultButton(
+                                      'Selecionar Vencedor',
+                                      () =>
+                                          DialogService.showConfirmationDialog(
+                                              context,
+                                              () =>
+                                                  handleVictory("leftPlayers"),
+                                              "Confirmar Vencedor?"),
+                                      Colors.black),
                                 ],
                               )
                             : Column(
@@ -220,16 +196,18 @@ class _GamePageState extends State<GamePage> {
                             ? Column(
                                 children: <Widget>[
                                   Container(
-                                    margin: EdgeInsets.only(bottom: 10),
-                                    child: Text("Jogo rolando...",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold)),
+                                    margin: EdgeInsets.only(bottom: 20),
+                                    child: Text(
+                                      "Jogo rolando...",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                   Container(
-                                    height: 100,
-                                    width: 100,
+                                    height: 80,
+                                    width: 80,
                                     child: Image(
                                       fit: BoxFit.contain,
                                       alignment: Alignment.center,
@@ -237,51 +215,31 @@ class _GamePageState extends State<GamePage> {
                                       image: AssetImage('images/tacos.png'),
                                     ),
                                   ),
-                                  Container(
-                                      margin: EdgeInsets.only(bottom: 10),
-                                      child: MaterialButton(
-                                        splashColor: Colors.green,
-                                        child: Text("Cancelar",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.white)),
-                                        color: Colors.red,
-                                        onPressed: () => setState(() {
-                                          this.isGameRunning = false;
-                                        }),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6)),
-                                      ))
+                                  DefaultButton(
+                                      "Cancelar",
+                                      () => setState(() {
+                                            this.isGameRunning = false;
+                                          }),
+                                      Colors.red)
                                 ],
                               )
-                            : Container(
-                                margin: EdgeInsets.only(top: 20),
-                                child: MaterialButton(
-                                  splashColor: Colors.green,
-                                  child: Text("Iniciar jogo",
-                                      style: TextStyle(
-                                          fontSize: 15, color: Colors.white)),
-                                  color: Colors.black,
-                                  onPressed: startGame,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(6)),
-                                )),
+                            : DefaultButton(
+                                'Iniciar Jogo',
+                                startGame,
+                                Colors.black,
+                              ),
                         isGameRunning
                             ? Column(
                                 children: <Widget>[
-                                  Container(
-                                    child: Text(
-                                      '${_usersToPlay[2].name} e ${_usersToPlay[3].name}',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  BlackButton(
+                                  PrimaryText(
+                                      '${_usersToPlay[2].name} e ${_usersToPlay[3].name}'),
+                                  DefaultButton(
                                     'Selecionar Vencedor',
-                                    () =>
-                                        showConfirmationDialog('rightPlayers'),
+                                    () => DialogService.showConfirmationDialog(
+                                        context,
+                                        () => handleVictory("rightPlayers"),
+                                        "Confirmar Vencedor?"),
+                                    Colors.black,
                                   ),
                                 ],
                               )
