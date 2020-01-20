@@ -1,4 +1,4 @@
-import 'package:bizinuca/pages/GamePage/Game.dart';
+import 'package:bizinuca/pages/GamePage/GamePage.dart';
 import 'package:bizinuca/pages/Home.dart';
 import 'package:bizinuca/pages/Login/Login.dart';
 import 'package:bizinuca/pages/SignUp/Signup.dart';

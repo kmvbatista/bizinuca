@@ -1,3 +1,5 @@
+import 'package:bizinuca/models/Game.dart';
+
 import '../models/User.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -19,12 +21,13 @@ class UserRepository {
         .toList();
   }
 
-  static List<Match> parseMatches(List<DocumentSnapshot> responseBody) {
+  static List<Game> parseGames(List<DocumentSnapshot> responseBody) {
     return responseBody
-        .map((res) => new Match(
-            name: res.data['name'],
-            points: res.data['points'],
-            id: res.documentID))
+        .map((game) => new Game(
+            players: game.data['players'].cast<String>(),
+            valuePoints: game.data['valuePoints'],
+            winnerPlayers: game.data['winnerPlayers'].cast<String>(),
+            date: game.data['date'].toString()))
         .toList();
   }
 
@@ -32,11 +35,8 @@ class UserRepository {
     return Future.delayed(Duration(seconds: 1));
   }
 
-  static Future getUsersMatches() async {
-    var result = await Firestore.instance
-        .collection('matches')
-        .where('players', arrayContains: 'users/1')
-        .getDocuments();
-    print(result.documents.data);
+  static Future getUserGames() async {
+    var result = await Firestore.instance.collection('matches').getDocuments();
+    return parseGames(result.documents);
   }
 }

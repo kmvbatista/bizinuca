@@ -1,14 +1,16 @@
-class Match {
+class Game {
   List<String> players;
   int valuePoints;
   List<String> winnerPlayers;
+  String date;
 
-  Match({this.players, this.valuePoints, this.winnerPlayers});
+  Game({this.players, this.valuePoints, this.winnerPlayers, this.date});
 
-  Match.fromJson(Map<String, dynamic> json) {
+  Game.fromJson(Map<String, dynamic> json) {
     players = json['players'].cast<String>();
     valuePoints = json['valuePoints'];
     winnerPlayers = json['winnerPlayers'].cast<String>();
+    winnerPlayers = json['date'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -16,6 +18,7 @@ class Match {
     data['players'] = this.players;
     data['valuePoints'] = this.valuePoints;
     data['winnerPlayers'] = this.winnerPlayers;
+    data['date'] = this.date;
     return data;
   }
 }

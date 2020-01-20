@@ -1,4 +1,5 @@
 import 'package:bizinuca/components/Menu.dart';
+import 'package:bizinuca/models/Game.dart';
 import 'package:bizinuca/models/User.dart';
 import 'package:bizinuca/pages/Gamehistory.dart';
 import 'package:bizinuca/pages/Statistics/Graphs.dart';
@@ -19,12 +20,13 @@ class _StatisticsState extends State<Statistics>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   List<User> _usersList;
+  List<Game> _userGames;
 
   @override
   void initState() {
     _tabController = new TabController(vsync: this, initialIndex: 0, length: 3);
     getUsers();
-    getUserMatches();
+    getUserGames();
     super.initState();
   }
 
@@ -36,9 +38,11 @@ class _StatisticsState extends State<Statistics>
     });
   }
 
-  getUserMatches() async {
-    UserRepository.getUsersMatches().then((users) {
-      print(users);
+  getUserGames() async {
+    UserRepository.getUserGames().then((games) {
+      setState(() {
+        _userGames = games;
+      });
     });
   }
 
@@ -73,7 +77,7 @@ class _StatisticsState extends State<Statistics>
               controller: _tabController,
               children: <Widget>[
                 Ranking(usersList: _usersList),
-                GameHistory(),
+                GameHistory(_userGames),
                 Graphs()
               ],
             ),
