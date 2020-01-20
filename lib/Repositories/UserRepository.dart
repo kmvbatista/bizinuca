@@ -18,4 +18,8 @@ class UserRepository {
             id: res.documentID))
         .toList();
   }
+
+  static Future updateUsers(List<User> users) async {
+    return Future.delayed(Duration(seconds: 1));
+  }
 }

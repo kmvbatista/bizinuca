@@ -9,6 +9,7 @@ import '../../components/Menu.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'CustomWidgets/UsersDropdown.dart';
+import 'GameLogic.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({Key key}) : super(key: key);
@@ -84,14 +85,21 @@ class _GamePageState extends State<GamePage> {
         });
   }
 
-  void handleVictory(String players) {
-    Navigator.of(context).pop();
-    if (players == "leftPlayers")
-      announceVictory(
-          "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
-    else
-      announceVictory(
-          "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
+  //TODO : DISPLAY LOADER WHILE UPDATING
+  void handleVictory(WinnerSide winnerSide) {
+    if (winnerSide == WinnerSide.LeftSide) {
+      GameLogic.recalculateUserPoints(_usersToPlay, WinnerSide.LeftSide)
+          .then((res) {
+        announceVictory(
+            "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
+      });
+    } else {
+      GameLogic.recalculateUserPoints(_usersToPlay, WinnerSide.LeftSide)
+          .then((res) {
+        announceVictory(
+            "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
+      });
+    }
   }
 
   void handleDropdown1(User selectedUser) {
@@ -173,8 +181,8 @@ class _GamePageState extends State<GamePage> {
                                       () =>
                                           DialogService.showConfirmationDialog(
                                               context,
-                                              () =>
-                                                  handleVictory("leftPlayers"),
+                                              () => handleVictory(
+                                                  WinnerSide.LeftSide),
                                               "Confirmar Vencedor?"),
                                       Colors.black),
                                 ],
@@ -232,7 +240,8 @@ class _GamePageState extends State<GamePage> {
                                     'Selecionar Vencedor',
                                     () => DialogService.showConfirmationDialog(
                                         context,
-                                        () => handleVictory("rightPlayers"),
+                                        () =>
+                                            handleVictory(WinnerSide.RightSide),
                                         "Confirmar Vencedor?"),
                                     Colors.black,
                                   ),
