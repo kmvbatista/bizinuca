@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 
 class PrimaryInput extends StatelessWidget {
-  final String text;
-  final TextInputType inputType;
+  final String _text;
+  final TextInputType _inputType;
   final bool obscureText;
+  final TextEditingController _inputController;
 
-  PrimaryInput(this.text, this.inputType, {this.obscureText = false});
+  PrimaryInput(this._text, this._inputType, this._inputController,
+      {this.obscureText = false});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: inputType,
+      controller: _inputController,
+      keyboardType: _inputType,
+      obscureText: obscureText,
       decoration: InputDecoration(
-        labelText: text,
+        labelText: _text,
         labelStyle: TextStyle(
             color: Colors.black38, fontWeight: FontWeight.w400, fontSize: 20),
       ),

@@ -8,6 +8,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,16 +43,14 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 10,
             ),
-            PrimaryInput(
-              "Email",
-              TextInputType.emailAddress,
-            ),
+            PrimaryInput("Email", TextInputType.emailAddress, emailController),
             SizedBox(
               height: 20,
             ),
             PrimaryInput(
               "Senha",
               TextInputType.text,
+              passwordController,
               obscureText: true,
             ),
             SizedBox(

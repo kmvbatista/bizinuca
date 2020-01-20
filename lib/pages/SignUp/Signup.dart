@@ -1,3 +1,4 @@
+import 'package:bizinuca/components/PrimaryInput.dart';
 import 'package:bizinuca/services/authentication_service.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,8 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  var confirmPasswordController = TextEditingController();
+  var nameController = TextEditingController();
 
   handleSignUp() async {
     var result = await AuthenticationService.signUpWithEmail(
@@ -50,52 +53,27 @@ class _SignUpState extends State<SignUp> {
             SizedBox(
               height: 10,
             ),
-            TextField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: "Email",
-                labelStyle: TextStyle(
-                    color: Colors.black38,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20),
-              ),
-              style: TextStyle(fontSize: 20),
-            ),
+            PrimaryInput("Digite seu nome Bizinuqueiro(único)",
+                TextInputType.text, nameController),
+            PrimaryInput("Digite seu email", TextInputType.emailAddress,
+                emailController),
             SizedBox(
               height: 20,
             ),
-            TextFormField(
-              controller: passwordController,
-              keyboardType: TextInputType.text,
+            PrimaryInput(
+              "Digite sua Senha",
+              TextInputType.text,
+              passwordController,
               obscureText: true,
-              decoration: InputDecoration(
-                labelText: "Senha",
-                labelStyle: TextStyle(
-                    color: Colors.black38,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20),
-              ),
-              autofocus: true,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-              ),
             ),
             SizedBox(
               height: 5,
             ),
-            TextField(
-              keyboardType: TextInputType.text,
+            PrimaryInput(
+              "Confirme sua Senha",
+              TextInputType.text,
+              confirmPasswordController,
               obscureText: true,
-              decoration: InputDecoration(
-                labelText: "Confirmar Senha",
-                labelStyle: TextStyle(
-                    color: Colors.black38,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 20),
-              ),
-              style: TextStyle(fontSize: 20),
             ),
             SizedBox(
               height: 30,

@@ -17,7 +17,10 @@ class StatisticsRepository {
   }
 
   static Future getUserGames() async {
-    var result = await Firestore.instance.collection('matches').getDocuments();
+    var result = await Firestore.instance
+        .collection('matches')
+        .where('players', arrayContains: 'jose')
+        .getDocuments();
     return parseGames(result.documents);
   }
 }
