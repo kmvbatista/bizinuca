@@ -3,7 +3,7 @@ import 'package:bizinuca/models/Game.dart';
 import 'package:bizinuca/models/User.dart';
 
 class GameLogic {
-  static Future recalculateUserPoints(List<User> users, WinnerSide winners) {
+  static Future postGame(List<User> users, WinnerSide winners) {
     var game = new GamePostModel(
         players: users,
         valuePoints: 200,

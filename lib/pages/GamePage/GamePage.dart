@@ -1,7 +1,7 @@
 import 'package:bizinuca/components/PrimaryButton.dart';
 import 'package:bizinuca/models/User.dart';
 import 'package:bizinuca/pages/GamePage/CustomWidgets/PrimaryText.dart';
-import 'package:bizinuca/services/DialogService.dart';
+import 'package:bizinuca/services/FeedBackService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../Repositories/UserRepository.dart';
@@ -76,7 +76,7 @@ class _GamePageState extends State<GamePage> {
         isGameRunning = true;
       });
     else {
-      DialogService.showAlertDialog(
+      FeedBackService.showAlertDialog(
           context, "Não existem dois ${userRepeated.name}!");
     }
   }
@@ -91,7 +91,7 @@ class _GamePageState extends State<GamePage> {
   }
 
   void announceVictory(String textDialog) {
-    DialogService.showAlertDialog(context, textDialog);
+    FeedBackService.showAlertDialog(context, textDialog);
   }
 
   //TODO : DISPLAY LOADER WHILE UPDATING
@@ -100,15 +100,13 @@ class _GamePageState extends State<GamePage> {
       isGameRunning = false;
     });
     if (winnerSide == WinnerSide.LeftSide) {
-      GameLogic.recalculateUserPoints(_usersToPlay, WinnerSide.LeftSide)
-          .then((res) {
+      GameLogic.postGame(_usersToPlay, WinnerSide.LeftSide).then((res) {
         announceVictory(
             "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
         getUsers();
       });
     } else {
-      GameLogic.recalculateUserPoints(_usersToPlay, WinnerSide.LeftSide)
-          .then((res) {
+      GameLogic.postGame(_usersToPlay, WinnerSide.LeftSide).then((res) {
         announceVictory(
             "${_usersToPlay[2].name} e ${_usersToPlay[3].name} venceram!");
         getUsers();
@@ -174,9 +172,9 @@ class _GamePageState extends State<GamePage> {
                                       '${_usersToPlay[0].name} e ${_usersToPlay[1].name}'),
                                   PrimaryButton(
                                       'Selecionar Vencedor',
-                                      () =>
-                                          DialogService.showConfirmationDialog(
-                                              context, () {
+                                      () => FeedBackService
+                                              .showConfirmationDialog(context,
+                                                  () {
                                             Navigator.of(context).pop();
                                             handleVictory(WinnerSide.LeftSide);
                                           }, "Confirmar Vencedor?"),
@@ -240,8 +238,9 @@ class _GamePageState extends State<GamePage> {
                                       '${_usersToPlay[2].name} e ${_usersToPlay[3].name}'),
                                   PrimaryButton(
                                     'Selecionar Vencedor',
-                                    () => DialogService.showConfirmationDialog(
-                                        context, () {
+                                    () =>
+                                        FeedBackService.showConfirmationDialog(
+                                            context, () {
                                       Navigator.of(context).pop();
                                       handleVictory(WinnerSide.RightSide);
                                     }, "Confirmar Vencedor?"),

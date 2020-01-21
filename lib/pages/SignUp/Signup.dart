@@ -1,7 +1,12 @@
 import 'package:bizinuca/components/PrimaryInput.dart';
 import 'package:bizinuca/components/SecondaryButton.dart';
+import 'package:bizinuca/models/User.dart';
+import 'package:bizinuca/services/FeedBackService.dart';
 import 'package:bizinuca/services/authentication_service.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:dio/dio.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -13,12 +18,25 @@ class _SignUpState extends State<SignUp> {
   var passwordController = TextEditingController();
   var confirmPasswordController = TextEditingController();
   var nameController = TextEditingController();
+  bool isUpdating = false;
+  Dio dio = Dio();
 
   handleSignUp() async {
-    var result = await AuthenticationService.signUpWithEmail(
-        email: emailController.text, password: passwordController.text);
-    if (result) {
+    try {
+      await dio.post(
+          'https://us-central1-bizinuca.cloudfunctions.net/createUniqueUser',
+          data: {
+            "name": nameController.text,
+            "password": passwordController.text,
+            "email": emailController.text,
+            "points": 1000
+          });
+      FeedBackService.showAlertDialog(
+          context, "Cadastro efetuado com sucesso. Faça login!");
       Navigator.popAndPushNamed(context, '/login');
+    } catch (e) {
+      FeedBackService.showAlertDialog(
+          context, 'Houve um erro na sua requisição');
     }
   }
 
@@ -79,7 +97,12 @@ class _SignUpState extends State<SignUp> {
             SizedBox(
               height: 12,
             ),
-            SecondaryButton("Cadastrar-se", handleSignUp)
+            isUpdating
+                ? SpinKitCircle(
+                    color: Colors.white,
+                    size: 50.0,
+                  )
+                : SecondaryButton("Cadastrar-se", handleSignUp)
           ],
         ),
       ),

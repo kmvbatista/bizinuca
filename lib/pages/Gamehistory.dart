@@ -1,5 +1,5 @@
 import 'package:bizinuca/models/Game.dart';
-import 'package:bizinuca/services/DialogService.dart';
+import 'package:bizinuca/services/FeedBackService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -28,14 +28,14 @@ class _GameHistoryState extends State<GameHistory> {
           .map((game) => DataRow(cells: [
                 DataCell(
                   Text(game.date),
-                  onTap: () => DialogService.showAlertDialog(context,
+                  onTap: () => FeedBackService.showAlertDialog(context,
                       " Na partida jogaram ${game.players[0]} e ${game.players[1]} contra ${game.players[2]} e ${game.players[3]}."),
                 ),
                 DataCell(
                   Text("${game.winnerPlayers[0]} e ${game.winnerPlayers[1]}",
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.green)),
-                  onTap: () => DialogService.showAlertDialog(context,
+                  onTap: () => FeedBackService.showAlertDialog(context,
                       " Na partida jogaram ${game.players[0]} e ${game.players[1]} contra ${game.players[2]} e ${game.players[3]}."),
                 )
               ]))

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DialogService {
+class FeedBackService {
   static void showConfirmationDialog(
       BuildContext context, Function onPress, String text) {
     showDialog(
