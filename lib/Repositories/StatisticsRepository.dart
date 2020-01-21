@@ -10,7 +10,8 @@ class StatisticsRepository {
             players: game.data['players'].cast<String>(),
             valuePoints: game.data['valuePoints'],
             winnerPlayers: game.data['winnerPlayers'].cast<String>(),
-            date: DateFormat("dd-MM-yyyy").format(game.data['date'].toDate()),
+            date: DateFormat("dd-MM-yyyy HH:mm")
+                .format(game.data['date'].toDate()),
           ),
         )
         .toList();
@@ -22,5 +23,23 @@ class StatisticsRepository {
         .where('players', arrayContains: 'jose')
         .getDocuments();
     return parseGames(result.documents);
+  }
+
+  static Future getStatistics() async {
+    var result = await Firestore.instance
+        .collection('points')
+        .where('userId', isEqualTo: '1')
+        .orderBy(
+          'date',
+          descending: true,
+        )
+        .getDocuments();
+    return parseGames(result.documents);
+  }
+
+  static Future postGame(GamePostModel game) async {
+    var response =
+        await Firestore.instance.collection('matches').add(game.toJson());
+    print(response);
   }
 }

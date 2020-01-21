@@ -17,7 +17,7 @@ class PrimaryInput extends StatelessWidget {
       decoration: InputDecoration(
         labelText: _text,
         labelStyle: TextStyle(
-            color: Colors.black38, fontWeight: FontWeight.w400, fontSize: 20),
+            color: Colors.black38, fontWeight: FontWeight.w400, fontSize: 15),
       ),
       autofocus: true,
       textAlign: TextAlign.center,

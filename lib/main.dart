@@ -16,7 +16,6 @@ class Bizinuca extends StatelessWidget {
       ),
       initialRoute: '/login',
       onGenerateRoute: (RouteSettings route) {
-        print(route.name);
         if (route.name != '/gamePage') {
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.portraitUp,

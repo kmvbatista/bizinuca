@@ -52,7 +52,7 @@ class _StatisticsState extends State<Statistics>
     return Scaffold(
       drawer: Menu(),
       appBar: AppBar(
-        title: Text("Bizinuca Ranking"),
+        title: Text("Suas Estatísticas"),
         bottom: new TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,
@@ -61,10 +61,10 @@ class _StatisticsState extends State<Statistics>
               text: "Ranking",
             ),
             new Tab(
-              text: "Statistics",
+              text: "Histórico",
             ),
             new Tab(
-              text: "History",
+              text: "Estatísticas",
             )
           ],
         ),

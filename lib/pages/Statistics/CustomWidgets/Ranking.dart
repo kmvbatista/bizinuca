@@ -1,6 +1,5 @@
 import 'package:bizinuca/models/User.dart';
 import 'package:bizinuca/Repositories/UserRepository.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
@@ -33,23 +32,33 @@ class _RankingState extends State<Ranking> {
   getUserTextStyle(String username) {
     return username == 'jose'
         ? TextStyle(
-            color: Colors.green,
+            color: Colors.blue,
             fontStyle: FontStyle.italic,
-            fontWeight: FontWeight.bold)
-        : null;
+            fontWeight: FontWeight.bold,
+            fontSize: 17)
+        : TextStyle(color: Colors.green, fontWeight: FontWeight.bold);
   }
 
   getDataRows() {
     TextStyle textStyle;
     setState(() {
+      int position = 1;
       _dataRows = _usersList.map((user) {
         textStyle = getUserTextStyle(user.name);
         return DataRow(cells: [
+          DataCell(
+            Text(
+              '${position++}º',
+              style: textStyle,
+            ),
+          ),
           DataCell(Text(user.name, style: textStyle)),
-          DataCell(Text(
-            user.points.toString(),
-            style: textStyle,
-          ))
+          DataCell(
+            Text(
+              user.points.toString(),
+              style: textStyle,
+            ),
+          ),
         ]);
       }).toList();
     });
@@ -58,23 +67,33 @@ class _RankingState extends State<Ranking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _dataRows == null
-          ? SpinKitCircle(
-              color: Colors.green,
-              size: 50.0,
-            )
-          : SingleChildScrollView(
-              child: DataTable(
-                columns: [
-                  DataColumn(label: Text("Jogador"), numeric: false),
-                  DataColumn(
-                    label: Text("Pontos"),
-                    numeric: true,
+        body: _dataRows == null
+            ? SpinKitCircle(
+                color: Colors.green,
+                size: 50.0,
+              )
+            : ListView(padding: EdgeInsets.all(10), children: <Widget>[
+                SizedBox(
+                  height: 80,
+                  width: 80,
+                  child: Image.asset("images/podium.png"),
+                ),
+                SingleChildScrollView(
+                  child: DataTable(
+                    columns: [
+                      DataColumn(
+                        label: Text("Pos."),
+                        numeric: true,
+                      ),
+                      DataColumn(label: Text("Jogador"), numeric: false),
+                      DataColumn(
+                        label: Text("Pontos"),
+                        numeric: false,
+                      ),
+                    ],
+                    rows: _dataRows,
                   ),
-                ],
-                rows: _dataRows,
-              ),
-            ),
-    );
+                ),
+              ]));
   }
 }

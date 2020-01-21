@@ -30,10 +30,28 @@ class _GamePageState extends State<GamePage> {
   void initState() {
     getUsers();
     super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+    BackButtonInterceptor.add(myInterceptor);
   }
 
-  void getUsers() {
-    UserRepository.getUsers().then((users) {
+  bool myInterceptor(bool stopDefaultButtonEvent) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+    return false;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    BackButtonInterceptor.removeAll();
+  }
+
+  Future getUsers() {
+    return UserRepository.getUsers().then((users) {
       _usersToPlay = new List<User>();
       setState(() {
         for (var i = 0; i < playersQuantity; i++) {
@@ -78,17 +96,22 @@ class _GamePageState extends State<GamePage> {
 
   //TODO : DISPLAY LOADER WHILE UPDATING
   void handleVictory(WinnerSide winnerSide) {
+    setState(() {
+      isGameRunning = false;
+    });
     if (winnerSide == WinnerSide.LeftSide) {
       GameLogic.recalculateUserPoints(_usersToPlay, WinnerSide.LeftSide)
           .then((res) {
         announceVictory(
             "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
+        getUsers();
       });
     } else {
       GameLogic.recalculateUserPoints(_usersToPlay, WinnerSide.LeftSide)
           .then((res) {
         announceVictory(
             "${_usersToPlay[2].name} e ${_usersToPlay[3].name} venceram!");
+        getUsers();
       });
     }
   }

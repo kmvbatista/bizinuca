@@ -1,4 +1,5 @@
 import 'package:bizinuca/components/PrimaryInput.dart';
+import 'package:bizinuca/components/SecondaryButton.dart';
 import 'package:bizinuca/services/authentication_service.dart';
 import 'package:flutter/material.dart';
 
@@ -51,17 +52,17 @@ class _SignUpState extends State<SignUp> {
               textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
-            PrimaryInput("Digite seu nome Bizinuqueiro(único)",
-                TextInputType.text, nameController),
-            PrimaryInput("Digite seu email", TextInputType.emailAddress,
-                emailController),
+            PrimaryInput("Seu nome de Bizinuqueiro (único)", TextInputType.text,
+                nameController),
+            PrimaryInput(
+                "Seu email", TextInputType.emailAddress, emailController),
             SizedBox(
-              height: 20,
+              height: 5,
             ),
             PrimaryInput(
-              "Digite sua Senha",
+              "Sua Senha",
               TextInputType.text,
               passwordController,
               obscureText: true,
@@ -76,33 +77,9 @@ class _SignUpState extends State<SignUp> {
               obscureText: true,
             ),
             SizedBox(
-              height: 30,
+              height: 12,
             ),
-            Container(
-              height: 40,
-              alignment: Alignment.centerLeft,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[
-                      Color(0xFF66BB6A),
-                      Color(0xFF388E3C),
-                      Color(0xFF1B5E20),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(5))),
-              child: SizedBox.expand(
-                child: FlatButton(
-                  child: Text(
-                    "Cadastrar-se",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                  onPressed: handleSignUp,
-                ),
-              ),
-            ),
+            SecondaryButton("Cadastrar-se", handleSignUp)
           ],
         ),
       ),
