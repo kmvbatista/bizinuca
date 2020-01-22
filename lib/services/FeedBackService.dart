@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class FeedBackService {
-  static void showConfirmationDialog(
+  static void showYesNoDialog(
       BuildContext context, Function onPress, String text) {
     showDialog(
         context: context,
@@ -15,6 +15,26 @@ class FeedBackService {
                 onPressed: () => Navigator.of(context).pop(),
               ),
               FlatButton(child: Text("Sim"), onPressed: onPress),
+            ],
+          );
+        });
+  }
+
+  static showConfirmationDialog(
+      BuildContext context, String text, Function callback) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Text(text),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  callback();
+                },
+              )
             ],
           );
         });

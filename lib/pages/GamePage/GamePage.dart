@@ -172,9 +172,8 @@ class _GamePageState extends State<GamePage> {
                                       '${_usersToPlay[0].name} e ${_usersToPlay[1].name}'),
                                   PrimaryButton(
                                       'Selecionar Vencedor',
-                                      () => FeedBackService
-                                              .showConfirmationDialog(context,
-                                                  () {
+                                      () => FeedBackService.showYesNoDialog(
+                                              context, () {
                                             Navigator.of(context).pop();
                                             handleVictory(WinnerSide.LeftSide);
                                           }, "Confirmar Vencedor?"),
@@ -238,9 +237,8 @@ class _GamePageState extends State<GamePage> {
                                       '${_usersToPlay[2].name} e ${_usersToPlay[3].name}'),
                                   PrimaryButton(
                                     'Selecionar Vencedor',
-                                    () =>
-                                        FeedBackService.showConfirmationDialog(
-                                            context, () {
+                                    () => FeedBackService.showYesNoDialog(
+                                        context, () {
                                       Navigator.of(context).pop();
                                       handleVictory(WinnerSide.RightSide);
                                     }, "Confirmar Vencedor?"),
