@@ -95,26 +95,25 @@ class _GamePageState extends State<GamePage> {
     FeedBackService.showAlertDialog(context, textDialog);
   }
 
-  //TODO : DISPLAY LOADER WHILE UPDATING
-  void handleVictory(WinnerSide winnerSide) {
+  void handleVictory(WinnerSide winnerSide) async {
     setState(() {
       isGameRunning = false;
       isLoading = true;
     });
     try {
       if (winnerSide == WinnerSide.LeftSide) {
-        GameLogic.postGame(_usersToPlay, WinnerSide.LeftSide).then((res) {
-          announceVictory(
-              "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
-          getUsers();
-        });
+        await GameLogic.postGame(_usersToPlay, WinnerSide.LeftSide);
+        announceVictory(
+            "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
       } else {
-        GameLogic.postGame(_usersToPlay, WinnerSide.LeftSide).then((res) {
-          announceVictory(
-              "${_usersToPlay[2].name} e ${_usersToPlay[3].name} venceram!");
-          getUsers();
-        });
+        await GameLogic.postGame(_usersToPlay, WinnerSide.LeftSide);
+        announceVictory(
+            "${_usersToPlay[2].name} e ${_usersToPlay[3].name} venceram!");
       }
+      getUsers();
+      setState(() {
+        isLoading = false;
+      });
     } catch (e) {
       FeedBackService.showAlertDialog(
           context, "Houve um erro ao finalizar o jogo");
