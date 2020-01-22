@@ -21,6 +21,9 @@ class _SignUpState extends State<SignUp> {
   bool isUpdating = false;
   Dio dio = Dio();
 
+  String capitalizeString(String string) =>
+      string[0].toUpperCase() + string.substring(1);
+
   handleSignUp() async {
     setState(() {
       isUpdating = true;
@@ -29,9 +32,9 @@ class _SignUpState extends State<SignUp> {
       await dio.post(
           'https://us-central1-bizinuca.cloudfunctions.net/createUniqueUser',
           data: {
-            "name": nameController.text,
-            "password": passwordController.text,
-            "email": emailController.text,
+            "name": capitalizeString(nameController.text.trim()),
+            "password": passwordController.text.trim(),
+            "email": emailController.text.trim(),
             "points": 1000
           });
       FeedBackService.showCalbackConfimationDialog(
