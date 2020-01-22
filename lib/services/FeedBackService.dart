@@ -20,7 +20,7 @@ class FeedBackService {
         });
   }
 
-  static showConfirmationDialog(
+  static showCalbackConfimationDialog(
       BuildContext context, String text, Function callback) {
     showDialog(
         context: context,

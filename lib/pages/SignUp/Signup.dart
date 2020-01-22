@@ -34,9 +34,10 @@ class _SignUpState extends State<SignUp> {
             "email": emailController.text,
             "points": 1000
           });
-      FeedBackService.showAlertDialog(
-          context, "Cadastro efetuado com sucesso. Faça login!");
-      Navigator.popAndPushNamed(context, '/login');
+      FeedBackService.showCalbackConfimationDialog(
+          context,
+          "Cadastro efetuado com sucesso. Faça login!",
+          () => Navigator.popAndPushNamed(context, '/login'));
     } catch (e) {
       FeedBackService.showAlertDialog(
           context, 'Houve um erro na sua requisição');
