@@ -22,6 +22,12 @@ class _GameHistoryState extends State<GameHistory> {
     getDataRows();
   }
 
+  TextStyle getWinnerPlayersTextStyle(winnerPlayers) {
+    if (winnerPlayers.contains('jose'))
+      return TextStyle(fontWeight: FontWeight.bold, color: Colors.green);
+    return TextStyle(fontWeight: FontWeight.bold, color: Colors.red);
+  }
+
   getDataRows() {
     setState(() {
       _dataRows = _games
@@ -33,8 +39,7 @@ class _GameHistoryState extends State<GameHistory> {
                 ),
                 DataCell(
                   Text("${game.winnerPlayers[0]} e ${game.winnerPlayers[1]}",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.green)),
+                      style: getWinnerPlayersTextStyle(game.winnerPlayers)),
                   onTap: () => FeedBackService.showAlertDialog(context,
                       " Na partida jogaram ${game.players[0]} e ${game.players[1]} contra ${game.players[2]} e ${game.players[3]}."),
                 )
