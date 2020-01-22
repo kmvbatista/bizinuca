@@ -1,4 +1,6 @@
 import 'package:bizinuca/models/Game.dart';
+import 'package:bizinuca/services/authentication_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -18,9 +20,11 @@ class StatisticsRepository {
   }
 
   static Future getUserGames() async {
+    var loggedUser = await FirebaseAuth.instance.currentUser();
+    print(loggedUser.displayName);
     var result = await Firestore.instance
         .collection('matches')
-        .where('players', arrayContains: 'jose')
+        .where('players', arrayContains: loggedUser.displayName)
         .getDocuments();
     return parseGames(result.documents);
   }
@@ -37,9 +41,7 @@ class StatisticsRepository {
     return parseGames(result.documents);
   }
 
-  static Future postGame(GamePostModel game) async {
-    var response =
-        await Firestore.instance.collection('matches').add(game.toJson());
-    print(response);
+  static Future postGame(GamePostModel game) {
+    return Firestore.instance.collection('matches').add(game.toJson());
   }
 }

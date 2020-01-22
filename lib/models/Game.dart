@@ -33,7 +33,7 @@ class GamePostModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['players'] = this.players.map((x) => x.toJson()).toList();
+    data['players'] = this.players.map((x) => x.name.toString()).toList();
     data['valuePoints'] = this.valuePoints;
     data['date'] = this.date;
     data['winnerSide'] = this.winnerSide.index;

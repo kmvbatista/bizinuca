@@ -25,6 +25,7 @@ class _GamePageState extends State<GamePage> {
   bool isGameRunning = false;
   final int playersQuantity = 4;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -98,19 +99,25 @@ class _GamePageState extends State<GamePage> {
   void handleVictory(WinnerSide winnerSide) {
     setState(() {
       isGameRunning = false;
+      isLoading = true;
     });
-    if (winnerSide == WinnerSide.LeftSide) {
-      GameLogic.postGame(_usersToPlay, WinnerSide.LeftSide).then((res) {
-        announceVictory(
-            "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
-        getUsers();
-      });
-    } else {
-      GameLogic.postGame(_usersToPlay, WinnerSide.LeftSide).then((res) {
-        announceVictory(
-            "${_usersToPlay[2].name} e ${_usersToPlay[3].name} venceram!");
-        getUsers();
-      });
+    try {
+      if (winnerSide == WinnerSide.LeftSide) {
+        GameLogic.postGame(_usersToPlay, WinnerSide.LeftSide).then((res) {
+          announceVictory(
+              "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
+          getUsers();
+        });
+      } else {
+        GameLogic.postGame(_usersToPlay, WinnerSide.LeftSide).then((res) {
+          announceVictory(
+              "${_usersToPlay[2].name} e ${_usersToPlay[3].name} venceram!");
+          getUsers();
+        });
+      }
+    } catch (e) {
+      FeedBackService.showAlertDialog(
+          context, "Houve um erro ao finalizar o jogo");
     }
   }
 
@@ -225,11 +232,13 @@ class _GamePageState extends State<GamePage> {
                                       Colors.red)
                                 ],
                               )
-                            : PrimaryButton(
-                                'Iniciar Jogo',
-                                startGame,
-                                Colors.black,
-                              ),
+                            : (isLoading
+                                ? FeedBackService.showSpinner(Colors.white)
+                                : PrimaryButton(
+                                    'Iniciar Jogo',
+                                    startGame,
+                                    Colors.black,
+                                  )),
                         isGameRunning
                             ? Column(
                                 children: <Widget>[
