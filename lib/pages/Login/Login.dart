@@ -1,5 +1,7 @@
 import 'package:bizinuca/components/PrimaryInput.dart';
 import 'package:bizinuca/components/SecondaryButton.dart';
+import 'package:bizinuca/services/FeedBackService.dart';
+import 'package:bizinuca/services/authentication_service.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -10,6 +12,21 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  bool isUpdating = false;
+
+  handleLogin() async {
+    try {
+      setState(() {
+        isUpdating = true;
+      });
+      await AuthenticationService.loginWithEmail(
+          email: emailController.text, password: emailController.text);
+      Navigator.popAndPushNamed(context, '/statistics');
+    } catch (e) {
+      FeedBackService.showAlertDialog(
+          context, "Houve um erro ao tentar logar.");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,8 +73,9 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 30,
             ),
-            SecondaryButton("Fazer Login",
-                () => Navigator.of(context).pushNamed('/statistics')),
+            isUpdating
+                ? FeedBackService.showSpinner(Colors.green)
+                : SecondaryButton("Fazer Login", handleLogin),
             SizedBox(
               height: 30,
             ),

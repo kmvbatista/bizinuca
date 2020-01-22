@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class FeedBackService {
   static void showConfirmationDialog(
@@ -33,5 +34,12 @@ class FeedBackService {
             ],
           );
         });
+  }
+
+  static Widget showSpinner(Color color) {
+    return SpinKitCircle(
+      color: color,
+      size: 50.0,
+    );
   }
 }

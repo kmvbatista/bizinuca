@@ -22,6 +22,9 @@ class _SignUpState extends State<SignUp> {
   Dio dio = Dio();
 
   handleSignUp() async {
+    setState(() {
+      isUpdating = true;
+    });
     try {
       await dio.post(
           'https://us-central1-bizinuca.cloudfunctions.net/createUniqueUser',
@@ -37,6 +40,9 @@ class _SignUpState extends State<SignUp> {
     } catch (e) {
       FeedBackService.showAlertDialog(
           context, 'Houve um erro na sua requisição');
+      setState(() {
+        isUpdating = false;
+      });
     }
   }
 
@@ -98,10 +104,7 @@ class _SignUpState extends State<SignUp> {
               height: 12,
             ),
             isUpdating
-                ? SpinKitCircle(
-                    color: Colors.white,
-                    size: 50.0,
-                  )
+                ? FeedBackService.showSpinner(Colors.green)
                 : SecondaryButton("Cadastrar-se", handleSignUp)
           ],
         ),
