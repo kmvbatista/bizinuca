@@ -6,6 +6,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  charts_flutter: ^0.8.1
   dio: ^2.1.13
   intl: ^0.16.0
   back_button_interceptor: ^4.2.3

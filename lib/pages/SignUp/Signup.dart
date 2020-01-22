@@ -43,7 +43,7 @@ class _SignUpState extends State<SignUp> {
           () => Navigator.popAndPushNamed(context, '/login'));
     } catch (e) {
       FeedBackService.showAlertDialog(
-          context, 'Houve um erro na sua requisição');
+          context, 'Houve um erro na sua requisição. Tente novamente!');
       setState(() {
         isUpdating = false;
       });

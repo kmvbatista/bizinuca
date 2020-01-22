@@ -67,12 +67,14 @@ class _RankingState extends State<Ranking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _dataRows == null
-            ? SpinKitCircle(
-                color: Colors.green,
-                size: 50.0,
-              )
-            : ListView(padding: EdgeInsets.all(10), children: <Widget>[
+      body: _dataRows == null
+          ? SpinKitCircle(
+              color: Colors.green,
+              size: 50.0,
+            )
+          : ListView(
+              padding: EdgeInsets.all(10),
+              children: <Widget>[
                 SizedBox(
                   height: 80,
                   width: 80,
@@ -94,6 +96,8 @@ class _RankingState extends State<Ranking> {
                     rows: _dataRows,
                   ),
                 ),
-              ]));
+              ],
+            ),
+    );
   }
 }

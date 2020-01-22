@@ -14,7 +14,7 @@ class Bizinuca extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      initialRoute: '/login',
+      initialRoute: '/',
       onGenerateRoute: (RouteSettings route) {
         if (route.name != '/gamePage') {
           SystemChrome.setPreferredOrientations([

@@ -21,7 +21,7 @@ class _LoginState extends State<Login> {
       });
       await AuthenticationService.loginWithEmail(
           email: emailController.text, password: emailController.text);
-      Navigator.popAndPushNamed(context, '/statistics');
+      Navigator.popAndPushNamed(context, '/');
     } catch (e) {
       FeedBackService.showAlertDialog(
           context, "Houve um erro ao tentar logar.");

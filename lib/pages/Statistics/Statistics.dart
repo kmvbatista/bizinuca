@@ -8,7 +8,7 @@ import 'package:bizinuca/models/User.dart';
 import 'package:bizinuca/pages/Gamehistory.dart';
 import 'package:bizinuca/pages/Statistics/Graphs.dart';
 import 'package:bizinuca/Repositories/UserRepository.dart';
-import './CustomWidgets/Ranking.dart';
+import './Ranking.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({Key key}) : super(key: key);

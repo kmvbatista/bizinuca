@@ -53,6 +53,11 @@ class Menu extends StatelessWidget {
                 Icons.subdirectory_arrow_left,
                 "Logout",
                 () => Navigator.popAndPushNamed(context, '/login')),
+            BaseListTile(
+                Image.asset("images/medal.png", width: 40, height: 40),
+                Icons.home,
+                "Início",
+                () => Navigator.popAndPushNamed(context, '/')),
           ],
         ),
       ),
