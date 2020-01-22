@@ -40,10 +40,9 @@ class _StatisticsState extends State<Statistics>
   }
 
   getUserGames() async {
-    StatisticsRepository.getUserGames().then((games) {
-      setState(() {
-        _userGames = games;
-      });
+    var response = await StatisticsRepository.getUserGames();
+    setState(() {
+      _userGames = response;
     });
   }
 
@@ -69,7 +68,7 @@ class _StatisticsState extends State<Statistics>
           ],
         ),
       ),
-      body: _usersList == null
+      body: _usersList == null || _userGames == null
           ? SpinKitCircle(
               color: Colors.green,
               size: 50.0,
