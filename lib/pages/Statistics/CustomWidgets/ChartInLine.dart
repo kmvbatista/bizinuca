@@ -1,5 +1,7 @@
 import 'dart:math';
+import 'package:bizinuca/models/PointsPerDay.dart';
 import 'package:charts_flutter/flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/src/text_element.dart';
 import 'package:charts_flutter/src/text_style.dart' as style;
@@ -22,7 +24,8 @@ class _PointsLineChartState extends State<PointsLineChart> {
     var list = new List<Series<PointsPerDay, DateTime>>();
     list.add(new Series(
         data: points,
-        domainFn: (PointsPerDay pointsPerDay, _) => pointsPerDay.day,
+        domainFn: (PointsPerDay pointsPerDay, _) =>
+            DateTime(pointsPerDay.date.seconds),
         measureFn: (PointsPerDay pointsPerDay, _) => pointsPerDay.points,
         id: 'Points per day',
         colorFn: (PointsPerDay points, _) =>
@@ -47,13 +50,6 @@ class _PointsLineChartState extends State<PointsLineChart> {
           includePoints: true, strokeWidthPx: 1.2, includeArea: true),
     );
   }
-}
-
-class PointsPerDay {
-  final int points;
-  final DateTime day;
-
-  PointsPerDay(this.points, this.day);
 }
 
 class CustomCircleSymbolRenderer extends CircleSymbolRenderer {
