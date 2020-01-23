@@ -1,11 +1,7 @@
 import 'package:bizinuca/components/PrimaryInput.dart';
 import 'package:bizinuca/components/SecondaryButton.dart';
-import 'package:bizinuca/models/User.dart';
 import 'package:bizinuca/services/FeedBackService.dart';
-import 'package:bizinuca/services/authentication_service.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:dio/dio.dart';
 
 class SignUp extends StatefulWidget {

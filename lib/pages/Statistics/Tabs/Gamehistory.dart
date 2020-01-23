@@ -1,10 +1,10 @@
-import 'package:bizinuca/models/Game.dart';
+import 'package:bizinuca/models/MatchModel.dart';
 import 'package:bizinuca/services/FeedBackService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class GameHistory extends StatefulWidget {
-  final List<Game> _gameList;
+  final List<MatchModel> _gameList;
 
   GameHistory(this._gameList);
   @override
@@ -14,7 +14,7 @@ class GameHistory extends StatefulWidget {
 class _GameHistoryState extends State<GameHistory> {
   _GameHistoryState(this._games);
   List<DataRow> _dataRows;
-  List<Game> _games;
+  List<MatchModel> _games;
 
   @override
   void initState() {

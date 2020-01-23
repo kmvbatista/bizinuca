@@ -1,15 +1,14 @@
-import 'package:bizinuca/models/User.dart';
-import 'package:bizinuca/pages/GamePage/GameLogic.dart';
+import 'package:bizinuca/models/UserModel.dart';
 
-class Game {
+class MatchModel {
   List<String> players;
   int valuePoints;
   List<String> winnerPlayers;
   String date;
 
-  Game({this.players, this.valuePoints, this.winnerPlayers, this.date});
+  MatchModel({this.players, this.valuePoints, this.winnerPlayers, this.date});
 
-  Game.fromJson(Map<String, dynamic> json) {
+  MatchModel.fromJson(Map<String, dynamic> json) {
     players = json['players'].cast<String>();
     valuePoints = json['valuePoints'];
     winnerPlayers = json['winnerPlayers'].cast<String>();
@@ -18,17 +17,17 @@ class Game {
 }
 
 class GamePostModel {
-  List<User> players;
+  List<UserModel> players;
   int valuePoints;
   DateTime date;
-  WinnerSide winnerSide;
+  List<String> winners;
   int expectedPoints;
 
   GamePostModel(
       {this.players,
       this.valuePoints,
       this.date,
-      this.winnerSide,
+      this.winners,
       this.expectedPoints});
 
   Map<String, dynamic> toJson() {
@@ -36,7 +35,7 @@ class GamePostModel {
     data['players'] = this.players.map((x) => x.name.toString()).toList();
     data['valuePoints'] = this.valuePoints;
     data['date'] = this.date;
-    data['winnerSide'] = this.winnerSide.index;
+    data['winners'] = this.winners;
     data['expectedPoints'] = this.expectedPoints;
     return data;
   }

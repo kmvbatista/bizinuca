@@ -1,5 +1,5 @@
 import 'package:bizinuca/components/PrimaryButton.dart';
-import 'package:bizinuca/models/User.dart';
+import 'package:bizinuca/models/UserModel.dart';
 import 'package:bizinuca/pages/GamePage/CustomWidgets/PrimaryText.dart';
 import 'package:bizinuca/services/FeedBackService.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +20,8 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  List<DropdownMenuItem<User>> _usersToDropdown;
-  List<User> _usersToPlay;
+  List<DropdownMenuItem<UserModel>> _usersToDropdown;
+  List<UserModel> _usersToPlay;
   bool isGameRunning = false;
   final int playersQuantity = 4;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -53,7 +53,7 @@ class _GamePageState extends State<GamePage> {
 
   Future getUsers() {
     return UserRepository.getUsers().then((users) {
-      _usersToPlay = new List<User>();
+      _usersToPlay = new List<UserModel>();
       setState(() {
         for (var i = 0; i < playersQuantity; i++) {
           _usersToPlay.add(users[i]);
@@ -63,7 +63,7 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
-  List<DropdownMenuItem<User>> getDropdownUsers(List<User> users) {
+  List<DropdownMenuItem<UserModel>> getDropdownUsers(List<UserModel> users) {
     return users
         .map((user) =>
             new DropdownMenuItem(value: user, child: Text('${user.name}')))
@@ -82,7 +82,7 @@ class _GamePageState extends State<GamePage> {
     }
   }
 
-  User getUserRepeated() {
+  UserModel getUserRepeated() {
     for (var i = 0; i < playersQuantity - 1; i++) {
       var isUserRepeated =
           _usersToPlay.where((x) => x.id == _usersToPlay[i].id).length > 1;
@@ -120,7 +120,7 @@ class _GamePageState extends State<GamePage> {
     }
   }
 
-  void handleUserDropdown(User selectedUser, {@required int userIndex}) {
+  void handleUserDropdown(UserModel selectedUser, {@required int userIndex}) {
     setState(() {
       _usersToPlay[userIndex] = selectedUser;
     });
@@ -191,12 +191,14 @@ class _GamePageState extends State<GamePage> {
                                   UsersDropDown(
                                       _usersToPlay[0],
                                       _usersToDropdown,
-                                      (User user) => handleUserDropdown(user,
+                                      (UserModel user) => handleUserDropdown(
+                                          user,
                                           userIndex: 0)),
                                   UsersDropDown(
                                       _usersToPlay[1],
                                       _usersToDropdown,
-                                      (User user) => handleUserDropdown(user,
+                                      (UserModel user) => handleUserDropdown(
+                                          user,
                                           userIndex: 1)),
                                 ],
                               ),
@@ -259,12 +261,14 @@ class _GamePageState extends State<GamePage> {
                                   UsersDropDown(
                                       _usersToPlay[2],
                                       _usersToDropdown,
-                                      (User user) => handleUserDropdown(user,
+                                      (UserModel user) => handleUserDropdown(
+                                          user,
                                           userIndex: 2)),
                                   UsersDropDown(
                                       _usersToPlay[3],
                                       _usersToDropdown,
-                                      (User user) => handleUserDropdown(user,
+                                      (UserModel user) => handleUserDropdown(
+                                          user,
                                           userIndex: 3)),
                                 ],
                               )

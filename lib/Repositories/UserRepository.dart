@@ -1,4 +1,4 @@
-import '../models/User.dart';
+import '../models/UserModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserRepository {
@@ -10,9 +10,9 @@ class UserRepository {
     return parseUser(response.documents);
   }
 
-  static List<User> parseUser(List<DocumentSnapshot> responseBody) {
+  static List<UserModel> parseUser(List<DocumentSnapshot> responseBody) {
     return responseBody
-        .map((res) => new User(
+        .map((res) => new UserModel(
             name: res.data['name'],
             points: res.data['points'],
             id: res.documentID))

@@ -1,11 +1,11 @@
-class User {
+class UserModel {
   String name;
   int points;
   String id;
 
-  User({this.name, this.points, this.id});
+  UserModel({this.name, this.points, this.id});
 
-  User.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     points = json['points'];
     id = json['id'];

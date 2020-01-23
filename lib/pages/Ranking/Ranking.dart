@@ -1,10 +1,11 @@
-import 'package:bizinuca/models/User.dart';
+import 'package:bizinuca/components/Menu.dart';
+import 'package:bizinuca/models/UserModel.dart';
 import 'package:bizinuca/Repositories/UserRepository.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
 class Ranking extends StatefulWidget {
-  final List<User> usersList;
+  final List<UserModel> usersList;
   Ranking({this.usersList});
   @override
   _RankingState createState() => _RankingState(usersList);
@@ -12,11 +13,11 @@ class Ranking extends StatefulWidget {
 
 class _RankingState extends State<Ranking> {
   List<DataRow> _dataRows;
-  List<User> _usersList;
+  List<UserModel> _usersList;
   _RankingState(this._usersList);
   @override
   void initState() {
-    getDataRows();
+    getUsers();
     super.initState();
   }
 
@@ -67,6 +68,10 @@ class _RankingState extends State<Ranking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Menu(),
+      appBar: AppBar(
+        title: Text("Olhe quem está no topo"),
+      ),
       body: _dataRows == null
           ? SpinKitCircle(
               color: Colors.green,

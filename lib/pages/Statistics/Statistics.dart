@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:bizinuca/Repositories/StatisticsRepository.dart';
 import 'package:bizinuca/components/Menu.dart';
-import 'package:bizinuca/models/Game.dart';
-import 'package:bizinuca/models/User.dart';
-import 'package:bizinuca/pages/Gamehistory.dart';
-import 'package:bizinuca/pages/Statistics/Graphs.dart';
-import 'package:bizinuca/Repositories/UserRepository.dart';
-import './Ranking.dart';
+import 'package:bizinuca/models/MatchModel.dart';
+import 'package:bizinuca/models/UserModel.dart';
+import 'Tabs/Gamehistory.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({Key key}) : super(key: key);
@@ -20,51 +17,42 @@ class Statistics extends StatefulWidget {
 class _StatisticsState extends State<Statistics>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-  List<User> _usersList;
-  List<Game> _userGames;
+  List<UserModel> _usersList;
+  List<MatchModel> _userGames;
 
   @override
   void initState() {
-    _tabController = new TabController(vsync: this, initialIndex: 0, length: 3);
-    getUsers();
+    _tabController = new TabController(vsync: this, initialIndex: 0, length: 1);
+    getStatistics();
     getUserGames();
     super.initState();
   }
 
-  getUsers() async {
-    UserRepository.getUsers().then((users) {
-      setState(() {
-        _usersList = users;
-      });
-    });
+  getStatistics() async {
+    StatisticsRepository.getStatistics();
   }
 
-  getUserGames() async {
-    var response = await StatisticsRepository.getUserGames();
-    setState(() {
-      _userGames = response;
-    });
-  }
+  getUserGames() async {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Menu(),
       appBar: AppBar(
-        title: Text("Suas Estatísticas"),
+        title: Text("Estatísticas"),
         bottom: new TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,
           tabs: <Widget>[
             new Tab(
-              text: "Ranking",
+              child: Icon(Icons.poll),
             ),
-            new Tab(
-              text: "Histórico",
-            ),
-            new Tab(
-              text: "Estatísticas",
-            )
+            // new Tab(
+            //   child: Icon(Icons.event),
+            // ),
+            // new Tab(
+            //   child: Icon(Icons.library_books),
+            // )
           ],
         ),
       ),
@@ -76,9 +64,7 @@ class _StatisticsState extends State<Statistics>
           : TabBarView(
               controller: _tabController,
               children: <Widget>[
-                Ranking(usersList: _usersList),
                 GameHistory(_userGames),
-                Graphs()
               ],
             ),
     );
