@@ -1,6 +1,7 @@
 import 'package:bizinuca/models/MatchModel.dart';
 import 'package:bizinuca/models/PointsPerDay.dart';
 import 'package:bizinuca/models/StatisticsModel.dart';
+import 'package:bizinuca/services/authentication_service.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
@@ -42,9 +43,10 @@ class StatisticsRepository {
 
   static Future<StatisticsModel> getStatistics() async {
     try {
+      var user = await AuthenticationService.getUserLogged();
       var result = await dio.post(
           'https://us-central1-bizinuca.cloudfunctions.net/getOverallStatistics',
-          data: {"name": "jose", "id": "1"});
+          data: {"name": user.displayName, "id": user.uid});
       var parsed = parseStatistics(result.data);
       return parsed;
     } catch (e) {

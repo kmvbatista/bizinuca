@@ -25,4 +25,8 @@ class AuthenticationService {
       return e.message;
     }
   }
+
+  static Future getUserLogged() async {
+    return await _firebaseAuth.currentUser();
+  }
 }

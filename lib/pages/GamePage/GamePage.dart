@@ -106,7 +106,7 @@ class _GamePageState extends State<GamePage> {
         announceVictory(
             "${_usersToPlay[0].name} e ${_usersToPlay[1].name} venceram!");
       } else {
-        await GameLogic.postGame(_usersToPlay, WinnerSide.LeftSide);
+        await GameLogic.postGame(_usersToPlay, WinnerSide.RightSide);
         announceVictory(
             "${_usersToPlay[2].name} e ${_usersToPlay[3].name} venceram!");
       }

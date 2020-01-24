@@ -14,23 +14,28 @@ class _LoginState extends State<Login> {
   var passwordController = TextEditingController();
   bool isLoading = false;
 
-  handleLogin() async {
-    try {
-      setState(() {
+  deactivateLoader() => setState(() {
+        isLoading = false;
+      });
+
+  activateLoader() => setState(() {
         isLoading = true;
       });
+
+  handleLogin() async {
+    try {
+      activateLoader();
       var response = await AuthenticationService.loginWithEmail(
           email: emailController.text, password: passwordController.text);
       if (response is String) {
-        FeedBackService.showAlertDialog(context, "Senha ou email errados");
+        deactivateLoader();
+        FeedBackService.showAlertDialog(context, "Senha ou email inválidos!");
       } else {
         Navigator.popAndPushNamed(context, '/');
       }
     } catch (e) {
       print(e);
-      setState(() {
-        isLoading = false;
-      });
+      deactivateLoader();
       FeedBackService.showAlertDialog(
           context, "Houve um erro ao tentar logar.");
     }

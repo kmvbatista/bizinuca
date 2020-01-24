@@ -40,24 +40,18 @@ class Menu extends StatelessWidget {
             ),
             BaseListTile(
                 Image.asset("images/c.png", width: 40, height: 40),
-                Icons.directions_run,
                 "Jogar agora",
                 () => Navigator.popAndPushNamed(context, '/gamePage')),
             BaseListTile(
                 Image.asset("images/top-three.png", width: 40, height: 40),
-                Icons.poll,
                 "Ranking",
                 () => Navigator.popAndPushNamed(context, '/')),
             BaseListTile(
                 Image.asset("images/analytics64.png", width: 40, height: 40),
-                Icons.pie_chart,
                 "Estatísticas",
                 () => Navigator.popAndPushNamed(context, '/statistics')),
-            BaseListTile(
-                Image.asset("images/exit.png", width: 40, height: 40),
-                Icons.subdirectory_arrow_left,
-                "Logout",
-                () => Navigator.popAndPushNamed(context, '/login')),
+            BaseListTile(Image.asset("images/exit.png", width: 40, height: 40),
+                "Logout", () => Navigator.popAndPushNamed(context, '/login')),
           ],
         ),
       ),
@@ -69,16 +63,14 @@ class BaseListTile extends StatelessWidget {
   final Image _image;
   final String _text;
   final Function _onPress;
-  final IconData _icon;
 
-  BaseListTile(this._image, this._icon, this._text, this._onPress);
+  BaseListTile(this._image, this._text, this._onPress);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         ListTile(
-          leading: Icon(_icon, color: Colors.green),
           title: Text(_text, style: TextStyle(color: Colors.green)),
           trailing: _image,
           onTap: _onPress,
