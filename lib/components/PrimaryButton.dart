@@ -9,7 +9,7 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top: 20),
+        margin: EdgeInsets.only(top: 0),
         child: MaterialButton(
           child: Text(buttonText,
               style: TextStyle(fontSize: 15, color: Colors.white)),

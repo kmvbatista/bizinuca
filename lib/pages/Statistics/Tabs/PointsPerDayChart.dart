@@ -1,4 +1,5 @@
 import 'package:bizinuca/components/Menu.dart';
+import 'package:bizinuca/components/PrimaryButton.dart';
 import 'package:bizinuca/models/PointsPerDay.dart';
 import 'package:bizinuca/pages/Statistics/CustomWidgets/ChartInLine.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,32 @@ class PointsPerDayChart extends StatefulWidget {
 
 class _PointsPerDayChartState extends State<PointsPerDayChart>
     with SingleTickerProviderStateMixin {
+  showDetailsModal() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Container(
+            width: 300,
+            child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+              Expanded(
+                  child: ListView(shrinkWrap: true, children: <Widget>[
+                Text('data'),
+                Text('data'),
+                Text('data'),
+                Text('data'),
+                Text('data'),
+                Text('data'),
+                Text('data'),
+                Text('data'),
+              ]))
+            ]),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -49,19 +76,8 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
                       SizedBox(
                         height: 10,
                       ),
-                      FlatButton(
-                        splashColor: Colors.green,
-                        child: Text(
-                          "Lista Completa",
-                          style: TextStyle(
-                              color: Colors.green,
-                              fontStyle: FontStyle.italic,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600),
-                          textAlign: TextAlign.center,
-                        ),
-                        onPressed: () {},
-                      )
+                      PrimaryButton(
+                          "Ver Lista Completa", showDetailsModal, Colors.green)
                     ],
                   ),
                 ),

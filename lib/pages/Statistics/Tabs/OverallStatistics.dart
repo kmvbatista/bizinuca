@@ -52,7 +52,7 @@ class _OverallStatisticsState extends State<OverallStatistics> {
                 Text("Jogos vencidos esse mês: ${widget.wonMatchesThisMonth}.",
                     style: TextStyle(fontSize: 15)),
                 Text(
-                    "Paceiro com quem mais venceu: ${widget.mostWinnerPartner}.",
+                    "Parceiro com quem mais venceu: ${widget.mostWinnerPartner}.",
                     style: TextStyle(fontSize: 15))
               ],
             ),
