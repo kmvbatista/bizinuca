@@ -49,10 +49,10 @@ class _StatisticsState extends State<Statistics>
           indicatorColor: Colors.white,
           tabs: <Widget>[
             new Tab(
-              child: Icon(Icons.poll),
+              child: Icon(Icons.event),
             ),
             new Tab(
-              child: Icon(Icons.event),
+              child: Icon(Icons.poll),
             ),
             new Tab(
               child: Icon(Icons.library_books),
@@ -70,7 +70,11 @@ class _StatisticsState extends State<Statistics>
               children: <Widget>[
                 GameHistory(_statistics.userMatches),
                 PointsPerDayChart(_statistics.pointsPerDay),
-                OverallStatistics()
+                OverallStatistics(
+                    _statistics.mostWinnerPartner,
+                    _statistics.totalPlayedMatches,
+                    _statistics.totalWonMatches,
+                    _statistics.wonMatchesThisMonth)
               ],
             ),
     );

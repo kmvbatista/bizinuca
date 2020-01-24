@@ -44,7 +44,7 @@ class Menu extends StatelessWidget {
                 "Jogar agora",
                 () => Navigator.popAndPushNamed(context, '/gamePage')),
             BaseListTile(
-                Image.asset("images/top-three.png", width: 40, height: 40),
+                Image.asset("images/analytics64.png", width: 40, height: 40),
                 Icons.poll,
                 "Estatísticas",
                 () => Navigator.popAndPushNamed(context, '/statistics')),
@@ -54,9 +54,9 @@ class Menu extends StatelessWidget {
                 "Logout",
                 () => Navigator.popAndPushNamed(context, '/login')),
             BaseListTile(
-                Image.asset("images/medal.png", width: 40, height: 40),
+                Image.asset("images/top-three.png", width: 40, height: 40),
                 Icons.home,
-                "Início",
+                "Ranking",
                 () => Navigator.popAndPushNamed(context, '/')),
           ],
         ),
