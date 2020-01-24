@@ -28,19 +28,29 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
         body: TabBarView(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(40),
+              padding: EdgeInsets.all(8),
               child: Container(
                 child: Center(
                   child: Column(
                     children: <Widget>[
-                      Expanded(
-                        child: PointsLineChart(widget.pointsPerDay),
-                      )
+                      Text(
+                        "Clique em um jogo para ver os jogadores!",
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontStyle: FontStyle.italic,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Expanded(child: PointsLineChart(widget.pointsPerDay))
                     ],
                   ),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
