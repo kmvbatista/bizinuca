@@ -29,4 +29,8 @@ class AuthenticationService {
   static Future getUserLogged() async {
     return await _firebaseAuth.currentUser();
   }
+
+  static logout() {
+    _firebaseAuth.signOut();
+  }
 }

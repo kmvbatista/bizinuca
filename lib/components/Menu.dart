@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:bizinuca/services/authentication_service.dart';
 import 'package:flutter/material.dart';
 
 class Menu extends StatelessWidget {
@@ -50,8 +51,13 @@ class Menu extends StatelessWidget {
                 Image.asset("images/analytics64.png", width: 40, height: 40),
                 "Estatísticas",
                 () => Navigator.popAndPushNamed(context, '/statistics')),
-            BaseListTile(Image.asset("images/exit.png", width: 40, height: 40),
-                "Logout", () => Navigator.popAndPushNamed(context, '/login')),
+            BaseListTile(
+                Image.asset("images/exit.png", width: 40, height: 40), "Logout",
+                () {
+              AuthenticationService.logout();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/login', (Route<dynamic> route) => false);
+            }),
           ],
         ),
       ),

@@ -86,28 +86,31 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
               padding: EdgeInsets.all(8),
               child: Container(
                 child: Center(
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        "Variação de pontos por dia!",
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Expanded(child: PointsLineChart(widget.pointsPerDay)),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      PrimaryButton(
-                          "Ver Lista Completa", showDetailsModal, Colors.green)
-                    ],
-                  ),
+                  child: widget.pointsPerDay?.length == 0
+                      ? Text('Não há dados para exibir.')
+                      : Column(
+                          children: <Widget>[
+                            Text(
+                              "Variação de pontos por dia!",
+                              style: TextStyle(
+                                  color: Colors.green,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w600),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Expanded(
+                                child: PointsLineChart(widget.pointsPerDay)),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            PrimaryButton("Ver Lista Completa",
+                                showDetailsModal, Colors.green)
+                          ],
+                        ),
                 ),
               ),
             ),

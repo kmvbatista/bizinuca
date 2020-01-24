@@ -21,14 +21,16 @@ class _RankingState extends State<Ranking> {
   @override
   void initState() {
     super.initState();
-    getUsers();
+    getUserLogged().then((res) => getUsers());
   }
 
-  getUserLogged() {
-    AuthenticationService.getUserLogged().then((user) {
+  Future getUserLogged() {
+    return AuthenticationService.getUserLogged().then((user) {
       setState(() {
         _username = user.displayName;
       });
+    }).catchError((onError) {
+      Navigator.pushNamed(context, '/login');
     });
   }
 
@@ -41,8 +43,8 @@ class _RankingState extends State<Ranking> {
     });
   }
 
-  getUserTextStyle(String name, String userLoggedName) {
-    return name == userLoggedName
+  getUserTextStyle(String name) {
+    return name == _username
         ? TextStyle(
             color: Colors.blue,
             fontStyle: FontStyle.italic,
@@ -51,14 +53,12 @@ class _RankingState extends State<Ranking> {
         : TextStyle(color: Colors.green, fontWeight: FontWeight.bold);
   }
 
-  getDataRows() async {
-    var userLoggedname =
-        (await AuthenticationService.getUserLogged()).displayName;
+  getDataRows() {
     TextStyle textStyle;
     setState(() {
       int position = 1;
       _dataRows = _usersList.map((user) {
-        textStyle = getUserTextStyle(user.name, userLoggedname);
+        textStyle = getUserTextStyle(user.name);
         return DataRow(cells: [
           DataCell(
             Text(

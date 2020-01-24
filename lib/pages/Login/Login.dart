@@ -22,16 +22,27 @@ class _LoginState extends State<Login> {
         isLoading = true;
       });
 
+  bool isEmailValid() {
+    return RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(emailController.text);
+  }
+
   handleLogin() async {
     try {
       activateLoader();
-      var response = await AuthenticationService.loginWithEmail(
-          email: emailController.text, password: passwordController.text);
-      if (response is String) {
-        deactivateLoader();
-        FeedBackService.showAlertDialog(context, "Senha ou email inválidos!");
+      if (isEmailValid()) {
+        var response = await AuthenticationService.loginWithEmail(
+            email: emailController.text, password: passwordController.text);
+        if (response is String) {
+          deactivateLoader();
+          FeedBackService.showAlertDialog(context, "Senha ou email inválidos!");
+        } else {
+          Navigator.popAndPushNamed(context, '/');
+        }
       } else {
-        Navigator.popAndPushNamed(context, '/');
+        FeedBackService.showAlertDialog(context, 'Email em formato incorreto');
+        deactivateLoader();
       }
     } catch (e) {
       print(e);
