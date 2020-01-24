@@ -25,7 +25,7 @@ class _SignUpState extends State<SignUp> {
       isUpdating = true;
     });
     try {
-      await dio.post(
+      var response = await dio.post(
           'https://us-central1-bizinuca.cloudfunctions.net/createUniqueUser',
           data: {
             "name": capitalizeString(nameController.text.trim()),
@@ -33,6 +33,7 @@ class _SignUpState extends State<SignUp> {
             "email": emailController.text.trim(),
             "points": 1000
           });
+      print(response);
       FeedBackService.showCalbackConfimationDialog(
           context,
           "Cadastro efetuado com sucesso. Faça login!",

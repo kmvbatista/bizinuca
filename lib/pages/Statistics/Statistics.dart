@@ -1,13 +1,11 @@
-import 'package:bizinuca/models/StatisticsModel.dart';
-import 'package:bizinuca/pages/Statistics/Tabs/OverallStatistics.dart';
-import 'package:bizinuca/pages/Statistics/Tabs/PointsPerDayChart.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bizinuca/models/StatisticsModel.dart';
+import 'package:bizinuca/pages/Statistics/Tabs/OverallStatistics.dart';
+import 'package:bizinuca/pages/Statistics/Tabs/PointsPerDayChart.dart';
 import 'package:bizinuca/Repositories/StatisticsRepository.dart';
 import 'package:bizinuca/components/Menu.dart';
-import 'package:bizinuca/models/MatchModel.dart';
-import 'package:bizinuca/models/UserModel.dart';
 import 'Tabs/Gamehistory.dart';
 
 class Statistics extends StatefulWidget {
@@ -36,9 +34,6 @@ class _StatisticsState extends State<Statistics>
     });
   }
 
-  getUserGames() async {}
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Menu(),
@@ -74,7 +69,7 @@ class _StatisticsState extends State<Statistics>
                     _statistics.mostWinnerPartner,
                     _statistics.totalPlayedMatches,
                     _statistics.totalWonMatches,
-                    _statistics.wonMatchesThisMonth)
+                    _statistics.wonMatchesThisMonth),
               ],
             ),
     );

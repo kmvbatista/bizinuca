@@ -3,6 +3,7 @@ import 'package:bizinuca/components/PrimaryButton.dart';
 import 'package:bizinuca/models/PointsPerDay.dart';
 import 'package:bizinuca/pages/Statistics/CustomWidgets/ChartInLine.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PointsPerDayChart extends StatefulWidget {
   final List<PointsPerDay> pointsPerDay;
@@ -15,6 +16,32 @@ class PointsPerDayChart extends StatefulWidget {
 
 class _PointsPerDayChartState extends State<PointsPerDayChart>
     with SingleTickerProviderStateMixin {
+  List<DataRow> _dataRows;
+
+  @override
+  void initState() {
+    super.initState();
+    getDataRows();
+  }
+
+  getDataRows() {
+    var textStyle = TextStyle(color: Colors.green);
+    setState(() {
+      _dataRows = widget.pointsPerDay.map((point) {
+        return DataRow(cells: [
+          DataCell(Text(DateFormat("dd-MM-yyyy").format(point.date),
+              style: textStyle)),
+          DataCell(
+            Text(
+              point.points.toString(),
+              style: textStyle,
+            ),
+          ),
+        ]);
+      }).toList();
+    });
+  }
+
   showDetailsModal() {
     showDialog(
       context: context,
@@ -24,26 +51,27 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
             width: 300,
             child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
               Expanded(
-                  child: ListView(shrinkWrap: true, children: <Widget>[
-                Text('data'),
-                Text('data'),
-                Text('data'),
-                Text('data'),
-                Text('data'),
-                Text('data'),
-                Text('data'),
-                Text('data'),
-              ]))
+                child: SingleChildScrollView(
+                  child: DataTable(
+                    columns: [
+                      DataColumn(
+                        label: Text("Dia"),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          "Pontos",
+                        ),
+                      ),
+                    ],
+                    rows: _dataRows,
+                  ),
+                ),
+              )
             ]),
           ),
         );
       },
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override

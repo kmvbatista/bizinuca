@@ -1,8 +1,6 @@
 import 'package:bizinuca/models/MatchModel.dart';
 import 'package:bizinuca/models/PointsPerDay.dart';
 import 'package:bizinuca/models/StatisticsModel.dart';
-import 'package:bizinuca/pages/Statistics/CustomWidgets/ChartInLine.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';

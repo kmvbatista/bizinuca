@@ -12,17 +12,25 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
-  bool isUpdating = false;
+  bool isLoading = false;
 
   handleLogin() async {
     try {
       setState(() {
-        isUpdating = true;
+        isLoading = true;
       });
-      await AuthenticationService.loginWithEmail(
-          email: emailController.text, password: emailController.text);
-      Navigator.popAndPushNamed(context, '/');
+      var response = await AuthenticationService.loginWithEmail(
+          email: emailController.text, password: passwordController.text);
+      if (response is String) {
+        FeedBackService.showAlertDialog(context, "Senha ou email errados");
+      } else {
+        Navigator.popAndPushNamed(context, '/');
+      }
     } catch (e) {
+      print(e);
+      setState(() {
+        isLoading = false;
+      });
       FeedBackService.showAlertDialog(
           context, "Houve um erro ao tentar logar.");
     }
@@ -73,7 +81,7 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 30,
             ),
-            isUpdating
+            isLoading
                 ? FeedBackService.showSpinner(Colors.green)
                 : SecondaryButton("Fazer Login", handleLogin),
             SizedBox(
