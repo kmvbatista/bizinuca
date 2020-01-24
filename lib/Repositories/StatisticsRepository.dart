@@ -49,9 +49,7 @@ class StatisticsRepository {
           data: {"name": user.displayName, "id": user.uid});
       var parsed = parseStatistics(result.data);
       return parsed;
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   static Future postGame(GamePostModel game) {

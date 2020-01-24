@@ -1,3 +1,4 @@
+import 'package:bizinuca/services/authentication_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,7 @@ class _StatisticsState extends State<Statistics>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   StatisticsModel _statistics;
+  String _username;
 
   @override
   void initState() {
@@ -28,8 +30,10 @@ class _StatisticsState extends State<Statistics>
   }
 
   getStatistics() async {
+    var username = (await AuthenticationService.getUserLogged()).displayName;
     var result = await StatisticsRepository.getStatistics();
     setState(() {
+      _username = username;
       _statistics = result;
     });
   }
@@ -63,7 +67,7 @@ class _StatisticsState extends State<Statistics>
           : TabBarView(
               controller: _tabController,
               children: <Widget>[
-                GameHistory(_statistics.userMatches),
+                GameHistory(_statistics.userMatches, _username),
                 PointsPerDayChart(_statistics.pointsPerDay),
                 OverallStatistics(
                     _statistics.mostWinnerPartner,

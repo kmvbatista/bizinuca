@@ -33,7 +33,6 @@ class _SignUpState extends State<SignUp> {
             "email": emailController.text.trim(),
             "points": 1000
           });
-      print(response);
       FeedBackService.showCalbackConfimationDialog(
           context,
           "Cadastro efetuado com sucesso. Faça login!",

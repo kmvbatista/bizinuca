@@ -45,7 +45,6 @@ class _LoginState extends State<Login> {
         deactivateLoader();
       }
     } catch (e) {
-      print(e);
       deactivateLoader();
       FeedBackService.showAlertDialog(
           context, "Houve um erro ao tentar logar.");

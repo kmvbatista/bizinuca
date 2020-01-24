@@ -5,16 +5,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class GameHistory extends StatefulWidget {
   final List<MatchModel> _gameList;
+  final String _username;
 
-  GameHistory(this._gameList);
+  GameHistory(this._gameList, this._username);
   @override
-  _GameHistoryState createState() => _GameHistoryState(_gameList);
+  _GameHistoryState createState() => _GameHistoryState();
 }
 
 class _GameHistoryState extends State<GameHistory> {
-  _GameHistoryState(this._games);
   List<DataRow> _dataRows;
-  List<MatchModel> _games;
 
   @override
   void initState() {
@@ -23,14 +22,14 @@ class _GameHistoryState extends State<GameHistory> {
   }
 
   TextStyle getWinnerPlayersTextStyle(winnerPlayers) {
-    if (winnerPlayers.contains('jose'))
+    if (winnerPlayers.contains(widget._username))
       return TextStyle(fontWeight: FontWeight.bold, color: Colors.green);
     return TextStyle(fontWeight: FontWeight.bold, color: Colors.red);
   }
 
   getDataRows() {
     setState(() {
-      _dataRows = _games
+      _dataRows = widget._gameList
           .map((game) => DataRow(cells: [
                 DataCell(
                   Text(game.date),
@@ -81,7 +80,6 @@ class _GameHistoryState extends State<GameHistory> {
                         label: Text(
                           "Vencedores",
                         ),
-                        numeric: false,
                       ),
                     ],
                     rows: _dataRows,
