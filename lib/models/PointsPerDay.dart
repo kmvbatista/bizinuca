@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class PointsPerDay {
   String playerId;
   int points;
-  Timestamp date;
+  DateTime date;
 
   PointsPerDay(this.points, this.date, this.playerId);
 

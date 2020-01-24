@@ -5,6 +5,7 @@ class MatchModel {
   int valuePoints;
   List<String> winnerPlayers;
   String date;
+  int expectedPoints;
 
   MatchModel({this.players, this.valuePoints, this.winnerPlayers, this.date});
 
@@ -13,6 +14,7 @@ class MatchModel {
     valuePoints = json['valuePoints'];
     winnerPlayers = json['winnerPlayers'].cast<String>();
     winnerPlayers = json['date'].cast<DateTime>();
+    winnerPlayers = json['expectedPoints'];
   }
 }
 

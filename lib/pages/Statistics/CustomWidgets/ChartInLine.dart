@@ -24,8 +24,7 @@ class _PointsLineChartState extends State<PointsLineChart> {
     var list = new List<Series<PointsPerDay, DateTime>>();
     list.add(new Series(
         data: points,
-        domainFn: (PointsPerDay pointsPerDay, _) =>
-            DateTime(pointsPerDay.date.seconds),
+        domainFn: (PointsPerDay pointsPerDay, _) => pointsPerDay.date,
         measureFn: (PointsPerDay pointsPerDay, _) => pointsPerDay.points,
         id: 'Points per day',
         colorFn: (PointsPerDay points, _) =>

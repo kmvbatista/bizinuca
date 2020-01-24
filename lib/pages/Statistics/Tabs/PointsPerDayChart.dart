@@ -24,29 +24,26 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
     return DefaultTabController(
       length: 1,
       child: Scaffold(
-          drawer: Menu(),
-          appBar: AppBar(
-            title: Text("Estatísticas"),
-          ),
-          body: Column(
-            children: <Widget>[
-              Text(
-                "Seus pontos por dia.",
-                style: TextStyle(
-                    color: Colors.green,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w600),
-                textAlign: TextAlign.center,
+        drawer: Menu(),
+        body: TabBarView(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(40),
+              child: Container(
+                child: Center(
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: PointsLineChart(widget.pointsPerDay),
+                      )
+                    ],
+                  ),
+                ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                  padding: EdgeInsets.all(20),
-                  child: PointsLineChart(widget.pointsPerDay)),
-            ],
-          )),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

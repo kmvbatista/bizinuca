@@ -10,24 +10,34 @@ import 'package:dio/dio.dart';
 class StatisticsRepository {
   static final Dio dio = Dio();
 
-  static List<MatchModel> parseMatches(List<DocumentSnapshot> responseBody) {
+  static List<MatchModel> parseMatches(List<dynamic> responseBody) {
     return responseBody.map((game) {
-      List<String> players = game.data['players'].cast<String>();
+      List<String> players = game['players'].cast<String>();
       return new MatchModel(
           players: players,
-          valuePoints: game.data['valuePoints'],
-          date:
-              DateFormat("dd-MM-yyyy HH:mm").format(game.data['date'].toDate()),
-          winnerPlayers: game.data['winnerPlayers']);
+          date: DateFormat("dd-MM-yyyy HH:mm")
+              .format(parseDateFromTimeStamp(game['date']['_seconds'])),
+          winnerPlayers: game['winners'].cast<String>());
+    }).toList();
+  }
+
+  static DateTime parseDateFromTimeStamp(int seconds) {
+    return DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
+  }
+
+  static List<PointsPerDay> parsePointsPerDay(List<dynamic> responseBody) {
+    return responseBody.map((point) {
+      var date = parseDateFromTimeStamp(point['date']['_seconds']);
+      return new PointsPerDay(point['points'], date, point['playerId']);
     }).toList();
   }
 
   static StatisticsModel parseStatistics(Map response) {
     return new StatisticsModel(
         response['totalPlayedMatches'],
-        response['pointsPerDay'].cast<PointsPerDay>(),
+        parsePointsPerDay(response['pointsPerDay']),
         response['totalWonMatches'],
-        response['userMatches'].cast<MatchModel>(),
+        parseMatches(response['userMatches']),
         response['totalWonMatchesThisMonth'],
         response['mostWinnerPartner']);
   }

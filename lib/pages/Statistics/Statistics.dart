@@ -1,3 +1,6 @@
+import 'package:bizinuca/models/StatisticsModel.dart';
+import 'package:bizinuca/pages/Statistics/Tabs/OverallStatistics.dart';
+import 'package:bizinuca/pages/Statistics/Tabs/PointsPerDayChart.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
@@ -17,19 +20,20 @@ class Statistics extends StatefulWidget {
 class _StatisticsState extends State<Statistics>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-  List<UserModel> _usersList;
-  List<MatchModel> _userGames;
+  StatisticsModel _statistics;
 
   @override
   void initState() {
-    _tabController = new TabController(vsync: this, initialIndex: 0, length: 1);
+    _tabController = new TabController(vsync: this, initialIndex: 0, length: 3);
     getStatistics();
-    getUserGames();
     super.initState();
   }
 
   getStatistics() async {
-    StatisticsRepository.getStatistics();
+    var result = await StatisticsRepository.getStatistics();
+    setState(() {
+      _statistics = result;
+    });
   }
 
   getUserGames() async {}
@@ -47,16 +51,16 @@ class _StatisticsState extends State<Statistics>
             new Tab(
               child: Icon(Icons.poll),
             ),
-            // new Tab(
-            //   child: Icon(Icons.event),
-            // ),
-            // new Tab(
-            //   child: Icon(Icons.library_books),
-            // )
+            new Tab(
+              child: Icon(Icons.event),
+            ),
+            new Tab(
+              child: Icon(Icons.library_books),
+            )
           ],
         ),
       ),
-      body: _usersList == null || _userGames == null
+      body: _statistics == null
           ? SpinKitCircle(
               color: Colors.green,
               size: 50.0,
@@ -64,7 +68,9 @@ class _StatisticsState extends State<Statistics>
           : TabBarView(
               controller: _tabController,
               children: <Widget>[
-                GameHistory(_userGames),
+                GameHistory(_statistics.userMatches),
+                PointsPerDayChart(_statistics.pointsPerDay),
+                OverallStatistics()
               ],
             ),
     );
