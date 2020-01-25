@@ -20,12 +20,37 @@ class _SignUpState extends State<SignUp> {
   String capitalizeString(String string) =>
       string[0].toUpperCase() + string.substring(1);
 
+  bool isEmailValid() {
+    return RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(emailController.text);
+  }
+
+  bool passwordMatches() {
+    return passwordController.text == confirmPasswordController.text;
+  }
+
+  bool isFormValid() {
+    if (!isEmailValid()) {
+      FeedBackService.showAlertDialog(
+          context, 'Seu email está em um formato incorreto. Tente novamente!');
+      return false;
+    }
+    if (!passwordMatches()) {
+      FeedBackService.showAlertDialog(
+          context, 'As senhas não correspondem. Tente novamente!');
+      return false;
+    }
+    return true;
+  }
+
   handleSignUp() async {
-    setState(() {
-      isUpdating = true;
-    });
+    if (!isFormValid())
+      setState(() {
+        isUpdating = true;
+      });
     try {
-      var response = await dio.post(
+      await dio.post(
           'https://us-central1-bizinuca.cloudfunctions.net/createUniqueUser',
           data: {
             "name": capitalizeString(nameController.text.trim()),
