@@ -18,14 +18,14 @@ class MatchModel {
   }
 }
 
-class GamePostModel {
+class MatchPostModel {
   List<UserModel> players;
   int valuePoints;
   DateTime date;
-  List<String> winners;
+  List<UserModel> winners;
   int expectedPoints;
 
-  GamePostModel(
+  MatchPostModel(
       {this.players,
       this.valuePoints,
       this.date,
@@ -34,9 +34,9 @@ class GamePostModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['players'] = this.players.map((x) => x.name.toString()).toList();
+    data['players'] = this.players;
     data['valuePoints'] = this.valuePoints;
-    data['date'] = this.date;
+    data['date'] = this.date.millisecondsSinceEpoch;
     data['winners'] = this.winners;
     data['expectedPoints'] = this.expectedPoints;
     return data;

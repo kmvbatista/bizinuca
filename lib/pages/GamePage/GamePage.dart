@@ -117,6 +117,9 @@ class _GamePageState extends State<GamePage> {
     } catch (e) {
       FeedBackService.showAlertDialog(
           context, "Houve um erro ao finalizar o jogo");
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 

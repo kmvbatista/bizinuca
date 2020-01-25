@@ -1,3 +1,4 @@
+import 'package:bizinuca/services/FeedBackService.dart';
 import 'package:bizinuca/services/authentication_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
@@ -30,12 +31,16 @@ class _StatisticsState extends State<Statistics>
   }
 
   getStatistics() async {
-    var username = (await AuthenticationService.getUserLogged()).displayName;
-    var result = await StatisticsRepository.getStatistics();
-    setState(() {
-      _username = username;
-      _statistics = result;
-    });
+    try {
+      var userLogged = (await AuthenticationService.getUserLogged());
+      var result = await StatisticsRepository.getStatistics(userLogged);
+      setState(() {
+        _username = userLogged.displayName;
+        _statistics = result;
+      });
+    } catch (e) {
+      FeedBackService.showAlertDialog(context, "Houve um erro na requisição");
+    }
   }
 
   Widget build(BuildContext context) {

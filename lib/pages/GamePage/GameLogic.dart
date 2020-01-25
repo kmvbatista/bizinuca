@@ -5,7 +5,7 @@ import 'package:bizinuca/models/UserModel.dart';
 class GameLogic {
   static Future postGame(List<UserModel> users, WinnerSide winnerSide) {
     var winners = _getWinners(users, winnerSide);
-    var game = new GamePostModel(
+    var game = new MatchPostModel(
         players: users,
         valuePoints: 200,
         date: DateTime.now(),
@@ -20,12 +20,12 @@ class GameLogic {
     return pointsDifference.abs().round();
   }
 
-  static List<String> _getWinners(
+  static List<UserModel> _getWinners(
       List<UserModel> users, WinnerSide winnerSide) {
     if (winnerSide == WinnerSide.LeftSide) {
-      return users.sublist(0, 2).map((user) => user.name).toList();
+      return users.sublist(0, 2).map((user) => user).toList();
     } else {
-      return users.sublist(2, 4).map((user) => user.name).toList();
+      return users.sublist(2, 4).map((user) => user).toList();
     }
   }
 }

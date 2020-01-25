@@ -91,7 +91,7 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
                       : Column(
                           children: <Widget>[
                             Text(
-                              "Variação de pontos por dia!",
+                              "Variação de pontos por dia jogado!",
                               style: TextStyle(
                                   color: Colors.green,
                                   fontStyle: FontStyle.italic,
