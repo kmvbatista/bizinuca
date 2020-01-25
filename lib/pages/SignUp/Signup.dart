@@ -33,22 +33,22 @@ class _SignUpState extends State<SignUp> {
   bool isFormValid() {
     if (!isEmailValid()) {
       FeedBackService.showAlertDialog(
-          context, 'Seu email está em um formato incorreto. Tente novamente!');
+          context, 'Seu email está em um formato incorreto.\nTente novamente!');
       return false;
     }
     if (!passwordMatches()) {
       FeedBackService.showAlertDialog(
-          context, 'As senhas não correspondem. Tente novamente!');
+          context, 'As senhas não correspondem.\nTente novamente!');
       return false;
     }
     return true;
   }
 
   handleSignUp() async {
-    if (!isFormValid())
-      setState(() {
-        isUpdating = true;
-      });
+    if (!isFormValid()) return;
+    setState(() {
+      isUpdating = true;
+    });
     try {
       await dio.post(
           'https://us-central1-bizinuca.cloudfunctions.net/createUniqueUser',
@@ -62,9 +62,14 @@ class _SignUpState extends State<SignUp> {
           context,
           "Cadastro efetuado com sucesso. Faça login!",
           () => Navigator.popAndPushNamed(context, '/login'));
-    } catch (e) {
-      FeedBackService.showAlertDialog(
-          context, 'Houve um erro na sua requisição. Tente novamente!');
+    } catch (error) {
+      if (error.response.statusCode == 400) {
+        FeedBackService.showAlertDialog(
+            context, 'Nome de usuário já existente. Tente novamente!');
+      } else {
+        FeedBackService.showAlertDialog(
+            context, 'Houve um erro na sua requisição. Tente novamente!');
+      }
       setState(() {
         isUpdating = false;
       });
