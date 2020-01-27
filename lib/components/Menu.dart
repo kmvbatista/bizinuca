@@ -40,7 +40,7 @@ class Menu extends StatelessWidget {
               ),
             ),
             BaseListTile(
-                Image.asset("images/c.png", width: 40, height: 40),
+                Image.asset("images/yellowBall.png", width: 40, height: 40),
                 "Jogar agora",
                 () => Navigator.popAndPushNamed(context, '/gamePage')),
             BaseListTile(

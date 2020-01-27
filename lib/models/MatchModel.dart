@@ -23,14 +23,10 @@ class MatchPostModel {
   int valuePoints;
   DateTime date;
   List<UserModel> winners;
-  int expectedPoints;
+  List<UserModel> losers;
 
   MatchPostModel(
-      {this.players,
-      this.valuePoints,
-      this.date,
-      this.winners,
-      this.expectedPoints});
+      {this.players, this.valuePoints, this.date, this.winners, this.losers});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -38,7 +34,7 @@ class MatchPostModel {
     data['valuePoints'] = this.valuePoints;
     data['date'] = this.date.millisecondsSinceEpoch;
     data['winners'] = this.winners;
-    data['expectedPoints'] = this.expectedPoints;
+    data['losers'] = this.losers;
     return data;
   }
 }

@@ -1,6 +1,5 @@
 import 'package:bizinuca/components/PrimaryButton.dart';
 import 'package:bizinuca/models/UserModel.dart';
-import 'package:bizinuca/pages/GamePage/CustomWidgets/PrimaryText.dart';
 import 'package:bizinuca/services/FeedBackService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -174,8 +173,10 @@ class _GamePageState extends State<GamePage> {
                         isGameRunning
                             ? Column(
                                 children: <Widget>[
-                                  PrimaryText(
-                                      '${_usersToPlay[0].name} e ${_usersToPlay[1].name}'),
+                                  Text(
+                                    '${_usersToPlay[0].name} e ${_usersToPlay[1].name}',
+                                    style: Theme.of(context).textTheme.display3,
+                                  ),
                                   PrimaryButton(
                                       'Selecionar Vencedor',
                                       () => FeedBackService.showYesNoDialog(
@@ -241,8 +242,10 @@ class _GamePageState extends State<GamePage> {
                         isGameRunning
                             ? Column(
                                 children: <Widget>[
-                                  PrimaryText(
-                                      '${_usersToPlay[2].name} e ${_usersToPlay[3].name}'),
+                                  Text(
+                                    '${_usersToPlay[2].name} e ${_usersToPlay[3].name}',
+                                    style: Theme.of(context).textTheme.display3,
+                                  ),
                                   PrimaryButton(
                                     'Selecionar Vencedor',
                                     () => FeedBackService.showYesNoDialog(
