@@ -23,7 +23,8 @@ class _GameHistoryState extends State<GameHistory> {
 
   TextStyle getWinnerPlayersTextStyle(winnerPlayers) {
     if (winnerPlayers.contains(widget._username))
-      return TextStyle(fontWeight: FontWeight.bold, color: Colors.green);
+      return TextStyle(
+          fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor);
     return TextStyle(fontWeight: FontWeight.bold, color: Colors.red);
   }
 
@@ -52,7 +53,7 @@ class _GameHistoryState extends State<GameHistory> {
     return Scaffold(
       body: _dataRows == null
           ? SpinKitCircle(
-              color: Colors.green,
+              color: Theme.of(context).primaryColor,
               size: 50.0,
             )
           : ListView(
@@ -60,11 +61,7 @@ class _GameHistoryState extends State<GameHistory> {
               children: <Widget>[
                 Text(
                   "Clique em um jogo para ver os jogadores!",
-                  style: TextStyle(
-                      color: Colors.green,
-                      fontStyle: FontStyle.italic,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.headline,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(

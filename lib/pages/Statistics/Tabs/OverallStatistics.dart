@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class OverallStatistics extends StatefulWidget {
-  int totalWonMatches;
-  int wonMatchesThisMonth;
-  int totalPlayedMatches;
-  String mostWinnerPartner;
+  final int totalWonMatches;
+  final int wonMatchesThisMonth;
+  final int totalPlayedMatches;
+  final String mostWinnerPartner;
   OverallStatistics(this.mostWinnerPartner, this.totalPlayedMatches,
       this.totalWonMatches, this.wonMatchesThisMonth);
 
@@ -30,11 +30,7 @@ class _OverallStatisticsState extends State<OverallStatistics> {
         ),
         Text(
           "Demais estatísticas",
-          style: TextStyle(
-              color: Colors.green,
-              fontStyle: FontStyle.italic,
-              fontSize: 20,
-              fontWeight: FontWeight.w600),
+          style: Theme.of(context).textTheme.title,
           textAlign: TextAlign.center,
         ),
         Expanded(

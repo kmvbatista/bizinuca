@@ -25,7 +25,7 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
   }
 
   getDataRows() {
-    var textStyle = TextStyle(color: Colors.green);
+    var textStyle = TextStyle(color: Theme.of(context).primaryColor);
     setState(() {
       _dataRows = widget.pointsPerDay.map((point) {
         return DataRow(cells: [
@@ -48,7 +48,7 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
       builder: (BuildContext context) {
         return AlertDialog(
           content: Container(
-            width: 300,
+            width: MediaQuery.of(context).size.width * 0.8,
             child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
               Expanded(
                 child: SingleChildScrollView(
@@ -69,6 +69,11 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
               )
             ]),
           ),
+          actions: <Widget>[
+            FlatButton(
+                child: Text("Sair"),
+                onPressed: () => Navigator.of(context).pop())
+          ],
         );
       },
     );
@@ -92,11 +97,7 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
                           children: <Widget>[
                             Text(
                               "Variação de pontos por dia jogado!",
-                              style: TextStyle(
-                                  color: Colors.green,
-                                  fontStyle: FontStyle.italic,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w600),
+                              style: Theme.of(context).textTheme.headline,
                               textAlign: TextAlign.center,
                             ),
                             SizedBox(
@@ -107,8 +108,10 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
                             SizedBox(
                               height: 10,
                             ),
-                            PrimaryButton("Ver Lista Completa",
-                                showDetailsModal, Colors.green)
+                            PrimaryButton(
+                                "Ver Lista Completa",
+                                showDetailsModal,
+                                Theme.of(context).primaryColor)
                           ],
                         ),
                 ),

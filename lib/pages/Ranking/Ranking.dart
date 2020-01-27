@@ -50,7 +50,8 @@ class _RankingState extends State<Ranking> {
             fontStyle: FontStyle.italic,
             fontWeight: FontWeight.bold,
             fontSize: 17)
-        : TextStyle(color: Colors.green, fontWeight: FontWeight.bold);
+        : TextStyle(
+            color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold);
   }
 
   getDataRows() {
@@ -87,7 +88,7 @@ class _RankingState extends State<Ranking> {
       ),
       body: _dataRows == null
           ? SpinKitCircle(
-              color: Colors.green,
+              color: Theme.of(context).primaryColor,
               size: 50.0,
             )
           : ListView(

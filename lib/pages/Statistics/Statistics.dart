@@ -66,7 +66,7 @@ class _StatisticsState extends State<Statistics>
       ),
       body: _statistics == null
           ? SpinKitCircle(
-              color: Colors.green,
+              color: Theme.of(context).primaryColor,
               size: 50.0,
             )
           : TabBarView(

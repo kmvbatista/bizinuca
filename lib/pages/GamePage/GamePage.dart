@@ -116,7 +116,7 @@ class _GamePageState extends State<GamePage> {
       });
     } catch (e) {
       FeedBackService.showAlertDialog(
-          context, "Houve um erro ao finalizar o jogo");
+          context, "Houve um erro ao finalizar o jogo.");
       setState(() {
         isLoading = false;
       });
@@ -133,7 +133,7 @@ class _GamePageState extends State<GamePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        backgroundColor: Colors.green,
+        backgroundColor: Theme.of(context).primaryColor,
         drawer: Menu(),
         body: _usersToPlay == null
             ? SpinKitCircle(
@@ -157,10 +157,7 @@ class _GamePageState extends State<GamePage> {
                       title: Text(
                         "Bizinuca Challenge",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.display1,
                       ),
                       leading: FlatButton(
                         child: Icon(
@@ -212,10 +209,8 @@ class _GamePageState extends State<GamePage> {
                                     margin: EdgeInsets.only(bottom: 20),
                                     child: Text(
                                       "Jogo rolando...",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
+                                      style:
+                                          Theme.of(context).textTheme.display3,
                                     ),
                                   ),
                                   Container(

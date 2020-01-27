@@ -1,4 +1,5 @@
 import 'package:bizinuca/utils/route_utils.dart';
+import 'package:bizinuca/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,9 +12,7 @@ class Bizinuca extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bizinuca',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
+      theme: basicTheme(),
       initialRoute: '/',
       onGenerateRoute: (RouteSettings route) {
         if (route.name != '/gamePage') {

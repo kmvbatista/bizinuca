@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:bizinuca/models/PointsPerDay.dart';
 import 'package:charts_flutter/flutter.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/src/text_element.dart';
 import 'package:charts_flutter/src/text_style.dart' as style;
@@ -28,7 +27,7 @@ class _PointsLineChartState extends State<PointsLineChart> {
         measureFn: (PointsPerDay pointsPerDay, _) => pointsPerDay.points,
         id: 'Points per day',
         colorFn: (PointsPerDay points, _) =>
-            ColorUtil.fromDartColor(Colors.green),
+            ColorUtil.fromDartColor(Theme.of(context).primaryColor),
         labelAccessorFn: (PointsPerDay points, _) => '${points.points}'));
     return list;
   }

@@ -99,7 +99,7 @@ class _SignUpState extends State<SignUp> {
             Text(
               "Cadastre-se!",
               style: TextStyle(
-                  color: Colors.green,
+                  color: Theme.of(context).primaryColor,
                   fontStyle: FontStyle.italic,
                   fontSize: 20,
                   fontWeight: FontWeight.w600),
@@ -134,7 +134,7 @@ class _SignUpState extends State<SignUp> {
               height: 12,
             ),
             isUpdating
-                ? FeedBackService.showSpinner(Colors.green)
+                ? FeedBackService.showSpinner(Theme.of(context).primaryColor)
                 : SecondaryButton("Cadastrar-se", handleSignUp)
           ],
         ),

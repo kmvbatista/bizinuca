@@ -77,7 +77,8 @@ class BaseListTile extends StatelessWidget {
     return Column(
       children: <Widget>[
         ListTile(
-          title: Text(_text, style: TextStyle(color: Colors.green)),
+          title: Text(_text,
+              style: TextStyle(color: Theme.of(context).primaryColor)),
           trailing: _image,
           onTap: _onPress,
         ),

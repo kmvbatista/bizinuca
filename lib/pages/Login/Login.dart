@@ -71,15 +71,8 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 10,
             ),
-            Text(
-              "Bem vindo ao Bizinuca!",
-              style: TextStyle(
-                  color: Colors.green,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600),
-              textAlign: TextAlign.center,
-            ),
+            Text("Bem vindo ao Bizinuca!",
+                style: Theme.of(context).textTheme.headline),
             SizedBox(
               height: 10,
             ),
@@ -97,7 +90,7 @@ class _LoginState extends State<Login> {
               height: 30,
             ),
             isLoading
-                ? FeedBackService.showSpinner(Colors.green)
+                ? FeedBackService.showSpinner(Theme.of(context).primaryColor)
                 : SecondaryButton("Fazer Login", handleLogin),
             SizedBox(
               height: 30,
@@ -109,7 +102,7 @@ class _LoginState extends State<Login> {
                   "Cadastre-se",
                   textAlign: TextAlign.center,
                 ),
-                textColor: Colors.green,
+                textColor: Theme.of(context).primaryColor,
                 onPressed: () => Navigator.pushNamed(context, '/signup'),
               ),
             )
