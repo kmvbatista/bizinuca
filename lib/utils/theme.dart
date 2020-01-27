@@ -15,7 +15,10 @@ ThemeData basicTheme() {
       display2: base.display2.copyWith(
           fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black),
       display3: base.display3.copyWith(
-          fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
     );
   }
 

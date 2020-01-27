@@ -25,7 +25,7 @@ class _PointsPerDayChartState extends State<PointsPerDayChart>
   }
 
   getDataRows() {
-    var textStyle = TextStyle(color: Theme.of(context).primaryColor);
+    var textStyle = TextStyle(color: Colors.green);
     setState(() {
       _dataRows = widget.pointsPerDay.map((point) {
         return DataRow(cells: [

@@ -23,8 +23,7 @@ class _GameHistoryState extends State<GameHistory> {
 
   TextStyle getWinnerPlayersTextStyle(winnerPlayers) {
     if (winnerPlayers.contains(widget._username))
-      return TextStyle(
-          fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor);
+      return TextStyle(fontWeight: FontWeight.bold, color: Colors.green);
     return TextStyle(fontWeight: FontWeight.bold, color: Colors.red);
   }
 

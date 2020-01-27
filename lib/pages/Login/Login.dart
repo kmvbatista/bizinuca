@@ -72,6 +72,7 @@ class _LoginState extends State<Login> {
               height: 10,
             ),
             Text("Bem vindo ao Bizinuca!",
+                textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline),
             SizedBox(
               height: 10,

@@ -98,11 +98,7 @@ class _SignUpState extends State<SignUp> {
             ),
             Text(
               "Cadastre-se!",
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600),
+              style: Theme.of(context).textTheme.title,
               textAlign: TextAlign.center,
             ),
             SizedBox(
