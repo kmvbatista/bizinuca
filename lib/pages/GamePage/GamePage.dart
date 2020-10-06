@@ -1,4 +1,4 @@
-import 'package:bizinuca/components/PrimaryButton.dart';
+import 'package:bizinuca/components/primary_button.dart';
 import 'package:bizinuca/models/UserModel.dart';
 import 'package:bizinuca/services/FeedBackService.dart';
 import 'package:flutter/material.dart';

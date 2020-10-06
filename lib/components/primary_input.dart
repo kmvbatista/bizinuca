@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PrimaryInput extends StatelessWidget {
+  const PrimaryInput(this._text, this._inputType, this._inputController,
+      {this.obscureText = false});
+
   final String _text;
   final TextInputType _inputType;
   final bool obscureText;
   final TextEditingController _inputController;
 
-  PrimaryInput(this._text, this._inputType, this._inputController,
-      {this.obscureText = false});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -16,12 +17,15 @@ class PrimaryInput extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         labelText: _text,
-        labelStyle: TextStyle(
-            color: Colors.black38, fontWeight: FontWeight.w400, fontSize: 15),
+        labelStyle: const TextStyle(
+          color: Colors.black38,
+          fontWeight: FontWeight.w400,
+          fontSize: 15,
+        ),
       ),
       autofocus: true,
       textAlign: TextAlign.center,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 20,
       ),
     );
