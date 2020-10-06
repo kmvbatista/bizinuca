@@ -1,6 +1,6 @@
 import 'package:bizinuca/components/Menu.dart';
 import 'package:bizinuca/components/primary_button.dart';
-import 'package:bizinuca/models/PointsPerDay.dart';
+import 'package:bizinuca/models/points_per_day.dart';
 import 'package:bizinuca/pages/Statistics/CustomWidgets/ChartInLine.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

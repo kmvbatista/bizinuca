@@ -1,6 +1,6 @@
-import 'package:bizinuca/models/MatchModel.dart';
-import 'package:bizinuca/models/PointsPerDay.dart';
-import 'package:bizinuca/models/StatisticsModel.dart';
+import 'package:bizinuca/models/match_model.dart';
+import 'package:bizinuca/models/points_per_day.dart';
+import 'package:bizinuca/models/statistics_model.dart';
 import 'package:intl/intl.dart';
 import 'package:dio/dio.dart';
 

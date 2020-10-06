@@ -1,4 +1,4 @@
-import 'package:bizinuca/models/UserModel.dart';
+import 'package:bizinuca/models/user_model.dart';
 
 class MatchModel {
   List<String> players;
@@ -19,22 +19,23 @@ class MatchModel {
 }
 
 class MatchPostModel {
+  MatchPostModel(
+      {this.players, this.valuePoints, this.date, this.winners, this.losers});
+
   List<UserModel> players;
   int valuePoints;
   DateTime date;
   List<UserModel> winners;
   List<UserModel> losers;
 
-  MatchPostModel(
-      {this.players, this.valuePoints, this.date, this.winners, this.losers});
-
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['players'] = this.players;
-    data['valuePoints'] = this.valuePoints;
-    data['date'] = this.date.millisecondsSinceEpoch;
-    data['winners'] = this.winners;
-    data['losers'] = this.losers;
+    final data = <String, dynamic>{};
+
+    data['players'] = players;
+    data['valuePoints'] = valuePoints;
+    data['date'] = date.millisecondsSinceEpoch;
+    data['winners'] = winners;
+    data['losers'] = losers;
     return data;
   }
 }
