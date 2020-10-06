@@ -1,4 +1,4 @@
-import 'package:bizinuca/models/MatchModel.dart';
+import 'package:bizinuca/models/match_model.dart';
 import 'package:bizinuca/services/FeedBackService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

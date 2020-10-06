@@ -1,9 +1,9 @@
+import 'package:bizinuca/models/statistics_model.dart';
 import 'package:bizinuca/services/FeedBackService.dart';
 import 'package:bizinuca/services/authentication_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bizinuca/models/StatisticsModel.dart';
 import 'package:bizinuca/pages/Statistics/Tabs/OverallStatistics.dart';
 import 'package:bizinuca/pages/Statistics/Tabs/PointsPerDayChart.dart';
 import 'package:bizinuca/Repositories/StatisticsRepository.dart';

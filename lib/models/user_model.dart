@@ -1,8 +1,4 @@
 class UserModel {
-  String name;
-  int points;
-  String id;
-
   UserModel({this.name, this.points, this.id});
 
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -11,11 +7,16 @@ class UserModel {
     id = json['id'];
   }
 
+  String name;
+  int points;
+  String id;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['points'] = this.points;
-    data['id'] = this.id;
+    final data = <String, dynamic>{};
+
+    data['name'] = name;
+    data['points'] = points;
+    data['id'] = id;
     return data;
   }
 }

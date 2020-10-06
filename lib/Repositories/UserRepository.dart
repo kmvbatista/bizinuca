@@ -1,4 +1,4 @@
-import '../models/UserModel.dart';
+import 'package:bizinuca/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserRepository {
@@ -12,7 +12,7 @@ class UserRepository {
 
   static List<UserModel> parseUser(List<DocumentSnapshot> responseBody) {
     return responseBody
-        .map((res) => new UserModel(
+        .map((res) => UserModel(
             name: res.data['name'],
             points: res.data['points'],
             id: res.documentID))

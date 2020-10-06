@@ -1,6 +1,6 @@
 import 'package:bizinuca/components/Menu.dart';
-import 'package:bizinuca/models/UserModel.dart';
 import 'package:bizinuca/Repositories/UserRepository.dart';
+import 'package:bizinuca/models/user_model.dart';
 import 'package:bizinuca/services/authentication_service.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';

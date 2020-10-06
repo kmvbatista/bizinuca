@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:bizinuca/models/PointsPerDay.dart';
+import 'package:bizinuca/models/points_per_day.dart';
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/src/text_element.dart';

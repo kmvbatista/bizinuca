@@ -1,11 +1,11 @@
 import 'package:bizinuca/Repositories/StatisticsRepository.dart';
-import 'package:bizinuca/models/MatchModel.dart';
-import 'package:bizinuca/models/UserModel.dart';
+import 'package:bizinuca/models/match_model.dart';
+import 'package:bizinuca/models/user_model.dart';
 
 class GameLogic {
   static Future postGame(List<UserModel> users, WinnerSide winnerSide) {
-    var winnersLosers = _getWinnersLosers(users, winnerSide);
-    var game = new MatchPostModel(
+    final winnersLosers = _getWinnersLosers(users, winnerSide);
+    final game = MatchPostModel(
         players: users,
         valuePoints: 200,
         date: DateTime.now(),

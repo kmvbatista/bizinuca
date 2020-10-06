@@ -1,8 +1,4 @@
 class PointsPerDay {
-  String playerName;
-  int points;
-  DateTime date;
-
   PointsPerDay(this.points, this.date, this.playerName);
 
   PointsPerDay.fromJson(Map<String, dynamic> json) {
@@ -11,11 +7,16 @@ class PointsPerDay {
     points = json['points'];
   }
 
+  String playerName;
+  int points;
+  DateTime date;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['date'] = this.date;
-    data['playerName'] = this.playerName;
-    data['points'] = this.points;
+    final data = <String, dynamic>{};
+
+    data['date'] = date;
+    data['playerName'] = playerName;
+    data['points'] = points;
     return data;
   }
 }
