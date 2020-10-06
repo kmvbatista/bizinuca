@@ -7,7 +7,7 @@ environment:
 
 dependencies:
   charts_flutter: ^0.8.1
-  dio: ^2.1.13
+  dio: ^3.0.10
   intl: ^0.16.0
   back_button_interceptor: ^4.2.3
   cloud_firestore: 0.13.0+1
