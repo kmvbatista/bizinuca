@@ -1,5 +1,5 @@
-import 'package:bizinuca/components/PrimaryInput.dart';
-import 'package:bizinuca/components/SecondaryButton.dart';
+import 'package:bizinuca/components/primary_input.dart';
+import 'package:bizinuca/components/secondary_button.dart';
 import 'package:bizinuca/services/FeedBackService.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
